@@ -1,15 +1,18 @@
 import { useCallback, useEffect, useState } from 'react';
 import { Home } from './screens/Home';
 import { Quiz } from './screens/Quiz';
+import { Reader } from './screens/Reader';
 import { Result } from './screens/Result';
 import { Toasts } from './components/Toasts';
 import { clearSession, loadSession, saveSession, useToasts } from './lib/hooks';
 import { BANK_BY_ID, createSession } from './lib/quiz';
+import { useHashRoute } from './lib/router';
 
 export default function App() {
   const [session, setSession] = useState(null);
   const [draft, setDraft] = useState(() => loadSession());
   const { toasts, push, dismiss } = useToasts();
+  const route = useHashRoute();
 
   useEffect(() => {
     if (session) saveSession(session);
@@ -54,7 +57,9 @@ export default function App() {
   }, []);
 
   const bank = session ? BANK_BY_ID[session.bankId] : null;
-  const screen = !session ? 'home' : session.finishedAt ? 'result' : 'quiz';
+  /* Hash #doc/… là đường dẫn của tài liệu đọc: ưu tiên trước, luồng quiz không ghi hash
+     nên hành vi cũ giữ nguyên. */
+  const view = route ? 'reader' : !session ? 'home' : session.finishedAt ? 'result' : 'quiz';
   const position = session && !session.finishedAt ? session.index + 1 : 0;
 
   return (
@@ -63,35 +68,36 @@ export default function App() {
         Nhảy tới nội dung
       </a>
 
-      {session && (
+      {!route && session && (
         <header className="masthead" data-group={bank.group}>
           <span className="masthead__brand">
             Luyện thi <span className="num">210339</span>
           </span>
           <span className="chip chip--solid">{bank.short}</span>
           <span className="masthead__spacer" />
-          {screen === 'quiz' && (
+          {view === 'quiz' && (
             <span className="chip num">
               Câu {position}/{session.order.length}
             </span>
           )}
-          {screen === 'result' && <span className="chip">Đã nộp</span>}
+          {view === 'result' && <span className="chip">Đã nộp</span>}
           <button type="button" className="btn btn--ghost btn--sm masthead__btn" onClick={exit}>
-            {screen === 'quiz' ? 'Thoát' : 'Chọn đề khác'}
+            {view === 'quiz' ? 'Thoát' : 'Chọn đề khác'}
           </button>
         </header>
       )}
 
       <main id="main" className="stack">
-        {screen === 'home' && (
+        {view === 'home' && (
           <div className="wrap">
             <Home onStart={start} resume={draft} onResume={() => setSession(draft)} />
           </div>
         )}
-        {screen === 'quiz' && (
+        {view === 'quiz' && (
           <Quiz session={session} update={update} onFinish={finish} pushToast={push} />
         )}
-        {screen === 'result' && <Result session={session} onRetry={retry} onHome={exit} />}
+        {view === 'result' && <Result session={session} onRetry={retry} onHome={exit} />}
+        {view === 'reader' && <Reader route={route} pushToast={push} />}
       </main>
 
       <Toasts toasts={toasts} dismiss={dismiss} />

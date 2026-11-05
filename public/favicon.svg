@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Công nghệ Chế biến Sữa">
+  <rect width="64" height="64" rx="14" fill="#2c6b66" />
+  <path
+    d="M14 21h15a5 5 0 0 1 5 5v19a5 5 0 0 0-5-4H14z"
+    fill="#eceae4"
+  />
+  <path
+    d="M50 21H35a5 5 0 0 0-5 5v19a5 5 0 0 1 5-4h15z"
+    fill="#eceae4"
+    opacity="0.78"
+  />
+  <path d="M32 27v17" stroke="#2c6b66" stroke-width="2.5" stroke-linecap="round" />
+</svg>

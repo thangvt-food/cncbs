@@ -1,6 +1,10 @@
 import { useState } from 'react';
 import { BANKS, TYPE_META } from '../lib/quiz';
 import { Check } from '../components/icons';
+import { OfflineChip } from '../components/OfflineChip';
+import { CHAPTERS, TOTAL_WORDS, bookPercent } from '../lib/book';
+import { readProgress } from '../lib/progress';
+import { openDoc } from '../lib/router';
 
 const COUNTS = [10, 20, 40, 0];
 const MINUTES = [0, 15, 30, 45, 60, 90, 120];
@@ -20,6 +24,47 @@ function typeChips(bank) {
     id: t,
     text: `${n} ${TYPE_META[t].label.toLowerCase()}`,
   }));
+}
+
+function Reading() {
+  const { last, at } = readProgress();
+  const overall = bookPercent(at);
+  const lastChapter = last ? CHAPTERS.find((c) => c.id === last) : null;
+  const atLast = last ? at[last] : null;
+
+  return (
+    <section className="reading">
+      <div className="reading__head">
+        <h2>Tài liệu đọc</h2>
+        <p className="meta">
+          {CHAPTERS.length} chương tổng hợp lý thuyết · {TOTAL_WORDS.toLocaleString('vi-VN')} từ
+          {overall > 0 && <> · đã đọc <span className="num">{overall}%</span></>}
+        </p>
+      </div>
+
+      {lastChapter && (
+        <button type="button" className="btn btn--primary reading__go" onClick={() => openDoc(last)}>
+          Đọc tiếp {lastChapter.short} · {Math.round((atLast?.percent ?? 0) * 100)}%
+        </button>
+      )}
+
+      <div className="readlist">
+        {CHAPTERS.map((c) => {
+          const pct = Math.round((at[c.id]?.percent ?? 0) * 100);
+          return (
+            <button type="button" key={c.id} className="readrow" onClick={() => openDoc(c.id)}>
+              <span className="readrow__title">{c.title}</span>
+              <span className="readrow__meter" aria-hidden="true">
+                <span className="meter__fill" style={{ width: `${pct}%` }} />
+              </span>
+              <span className="num readrow__pct">{pct}%</span>
+            </button>
+          );
+        })}
+      </div>
+      <OfflineChip className="reading__off" />
+    </section>
+  );
 }
 
 export function Home({ onStart, resume, onResume }) {
@@ -110,6 +155,8 @@ export function Home({ onStart, resume, onResume }) {
           </div>
         </div>
       )}
+
+      <Reading />
 
       <div className="home__cols">
         <section className="home__col stack">
