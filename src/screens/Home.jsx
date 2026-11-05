@@ -1,19 +1,25 @@
 import { useState } from 'react';
 import { BANKS, TYPE_META } from '../lib/quiz';
+import { Check } from '../components/icons';
 
 const COUNTS = [10, 20, 40, 0];
 const MINUTES = [0, 15, 30, 45, 60, 90, 120];
+const MODES = [
+  { id: 'practice', name: 'Luyện tập', desc: 'Báo đúng sai ngay sau mỗi câu' },
+  { id: 'exam', name: 'Thi thử', desc: 'Chấm khi nộp bài, có đồng hồ đếm ngược' },
+];
 
 const bankTotal = BANKS.reduce((n, b) => n + b.total, 0);
 
-function typeBreakdown(bank) {
+function typeChips(bank) {
   const counts = {};
   bank.questions.forEach((q) => {
     counts[q.type] = (counts[q.type] ?? 0) + 1;
   });
-  return Object.entries(counts)
-    .map(([t, n]) => `${n} ${TYPE_META[t].label.toLowerCase()}`)
-    .join(' · ');
+  return Object.entries(counts).map(([t, n]) => ({
+    id: t,
+    text: `${n} ${TYPE_META[t].label.toLowerCase()}`,
+  }));
 }
 
 export function Home({ onStart, resume, onResume }) {
@@ -25,140 +31,260 @@ export function Home({ onStart, resume, onResume }) {
 
   const bank = BANKS.find((b) => b.id === bankId);
   const size = count === 0 ? bank.total : Math.min(count, bank.total);
+  const timed = mode === 'exam' && minutes > 0;
 
-  const pickCount = (n) => {
+  const pickCount = (n, id = bankId) => {
     setCount(n);
-    const b = BANKS.find((x) => x.id === bankId);
+    const b = BANKS.find((x) => x.id === id);
     const target = n === 0 ? b.total : Math.min(n, b.total);
     setMinutes(MINUTES.find((m) => m >= target) ?? 120);
   };
 
+  const moveCount = (event) => {
+    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[event.key];
+    if (!step) return;
+    event.preventDefault();
+    const next = (COUNTS.indexOf(count) + step + COUNTS.length) % COUNTS.length;
+    pickCount(COUNTS[next]);
+    event.currentTarget.querySelectorAll('[role="radio"]')[next].focus();
+  };
+
+  const answered = resume ? Object.keys(resume.answers ?? {}).length : 0;
+
+  const ticket = (
+    <>
+      <p className="ticket__num-row">
+        <span className="ticket__stat">
+          <span className="num ticket__value">{size}</span>
+          <span className="ticket__unit">câu</span>
+        </span>
+        <span className="ticket__stat">
+          {timed ? (
+            <>
+              <span className="num ticket__value">{minutes}</span>
+              <span className="ticket__unit">phút</span>
+            </>
+          ) : (
+            <span className="num ticket__value ticket__value--word">Không giới hạn</span>
+          )}
+        </span>
+      </p>
+      <p className="meta">
+        {mode === 'practice' ? 'Chế độ luyện tập' : 'Chế độ thi thử'} · {bank.short}
+      </p>
+    </>
+  );
+
   return (
     <div className="home">
       <header className="home__lede">
-        <h1>Luyện thi Chế biến Thực phẩm</h1>
-        <p className="meta">
-          {bankTotal} câu hỏi từ {BANKS.length} đề. Chọn đề, chọn chế độ rồi làm bài. Đáp án được chấm ngay khi nộp.
+        <h1>Công nghệ Chế biến Sữa</h1>
+        <p className="home__code">
+          Mã học phần <span className="num">210339</span>
+        </p>
+        <p className="home__intro">
+          {bankTotal} câu hỏi từ {BANKS.length} đề. Luyện tập báo đúng sai sau mỗi câu, Thi thử chấm khi nộp bài.
         </p>
       </header>
 
       {resume && (
-        <div className="card card--sunken stack">
-          <strong>{resume.finishedAt ? 'Bài đã nộp còn lưu trên máy này' : 'Bài làm chưa nộp còn lưu trên máy này'}</strong>
+        <div className="resume">
+          <div className="resume__head">
+            <h2>{resume.finishedAt ? 'Kết quả bài gần nhất' : 'Bạn đang làm dở một bài'}</h2>
+            <p className="resume__note">Lưu trên máy này</p>
+          </div>
           <p className="meta">
-            {BANKS.find((b) => b.id === resume.bankId)?.short ?? resume.bankId} ·{' '}
-            {Object.keys(resume.answers ?? {}).length}/{resume.order.length} câu đã trả lời
+            {BANKS.find((b) => b.id === resume.bankId)?.short ?? resume.bankId} · đã trả lời{' '}
+            <span className="num">
+              {answered}/{resume.order.length}
+            </span>{' '}
+            câu
           </p>
+          <div className="meter resume__meter">
+            <div className="meter__fill" style={{ width: `${(answered / resume.order.length) * 100}%` }} />
+          </div>
           <div>
-            <button type="button" className="btn btn--ghost" onClick={onResume}>
+            <button type="button" className="btn btn--light" onClick={onResume}>
               {resume.finishedAt ? 'Xem lại kết quả' : 'Tiếp tục bài đang làm'}
             </button>
           </div>
         </div>
       )}
 
-      <section className="stack">
-        <h2>Đề thi</h2>
-        <div className="banklist">
-          {BANKS.map((b) => (
-            <button
-              type="button"
-              key={b.id}
-              className="bankrow"
-              data-group={b.group}
-              data-selected={String(b.id === bankId)}
-              aria-pressed={b.id === bankId}
-              onClick={() => {
-                setBankId(b.id);
-                pickCount(count);
-              }}
-            >
-              <span className="swatch" aria-hidden="true" />
-              <span className="stack">
-                <span className="bankrow__title">{b.title}</span>
-                <span className="meta">{typeBreakdown(b)}</span>
-              </span>
-              <span className="bankrow__count">{b.total}</span>
-            </button>
-          ))}
-        </div>
-      </section>
+      <div className="home__cols">
+        <section className="home__col stack">
+          <h2 className="step">
+            <span className="step__num num">1</span>
+            Chọn đề
+          </h2>
+          <div className="banklist">
+            {BANKS.map((b) => {
+              const selected = b.id === bankId;
+              return (
+                <button
+                  type="button"
+                  key={b.id}
+                  className="bankrow"
+                  data-group={b.group}
+                  data-selected={String(selected)}
+                  aria-pressed={selected}
+                  onClick={() => {
+                    setBankId(b.id);
+                    pickCount(count, b.id);
+                  }}
+                >
+                  <span className="bankrow__lead">
+                    <span className="swatch" aria-hidden="true" />
+                    <span className="bankrow__tick" data-on={String(selected)} aria-hidden="true">
+                      <Check width={13} height={13} />
+                    </span>
+                  </span>
+                  <span className="bankrow__main">
+                    <span className="bankrow__title">{b.title}</span>
+                    <span className="bankrow__chips">
+                      {typeChips(b).map((c) => (
+                        <span className="chip chip--tiny" key={c.id}>
+                          {c.text}
+                        </span>
+                      ))}
+                    </span>
+                  </span>
+                  <span className="bankrow__count">
+                    <span className="num">{b.total}</span>
+                    <span className="bankrow__count-unit">câu</span>
+                  </span>
+                </button>
+              );
+            })}
+          </div>
+        </section>
 
-      <section className="setup">
-        <fieldset className="field" style={{ border: 0, padding: 0 }}>
-          <legend>Chế độ</legend>
-          <div className="segmented">
+        <section className="home__col stack">
+          <div className="ticket">
+            <div className="ticket__perf" aria-hidden="true" />
+            <p className="ticket__label">Tóm tắt</p>
+            {ticket}
             <button
               type="button"
-              className="btn"
-              aria-pressed={mode === 'practice'}
-              onClick={() => setMode('practice')}
+              className="btn btn--primary btn--block ticket__cta"
+              onClick={() =>
+                onStart({ bankId, mode, count: size, shuffle, minutes: mode === 'exam' ? minutes : 0 })
+              }
             >
-              Luyện tập
-            </button>
-            <button type="button" className="btn" aria-pressed={mode === 'exam'} onClick={() => setMode('exam')}>
-              Thi thử
+              Bắt đầu làm bài
             </button>
           </div>
-          <p className="meta">
-            {mode === 'practice'
-              ? 'Biết đúng sai ngay sau mỗi câu. Không giới hạn thời gian.'
-              : 'Chỉ chấm khi nộp bài. Có đồng hồ đếm ngược.'}
-          </p>
-        </fieldset>
 
-        <div className="field">
-          <label htmlFor="count">Số câu</label>
-          <select id="count" value={count} onChange={(e) => pickCount(Number(e.target.value))}>
-            {COUNTS.map((n) => (
-              <option key={n} value={n}>
-                {n === 0 ? `Toàn bộ đề (${bank.total} câu)` : `${Math.min(n, bank.total)} câu`}
-              </option>
+          <h2 className="step">
+            <span className="step__num num">2</span>
+            Chế độ
+          </h2>
+          <div className="modes">
+            {MODES.map((m) => (
+              <button
+                type="button"
+                key={m.id}
+                className="mode"
+                aria-pressed={mode === m.id}
+                onClick={() => setMode(m.id)}
+              >
+                <span className="mode__top">
+                  {m.name}
+                  <span className="mode__tick" data-on={String(mode === m.id)} aria-hidden="true">
+                    <Check width={12} height={12} />
+                  </span>
+                </span>
+                <span className="mode__desc">{m.desc}</span>
+              </button>
             ))}
-          </select>
-        </div>
+          </div>
 
-        <div className="field">
-          <label htmlFor="minutes">Thời gian làm bài</label>
-          <select
-            id="minutes"
-            value={minutes}
-            disabled={mode === 'practice'}
-            onChange={(e) => setMinutes(Number(e.target.value))}
-          >
-            {MINUTES.map((m) => (
-              <option key={m} value={m}>
-                {m === 0 ? 'Không giới hạn' : `${m} phút`}
-              </option>
-            ))}
-          </select>
-        </div>
+          <h2 className="step">
+            <span className="step__num num">3</span>
+            Thiết lập
+          </h2>
+          <div className="panel setup">
+            <div className="field">
+              <span className="field__label" id="count-label">
+                Số câu
+              </span>
+              <div
+                className="chips"
+                role="radiogroup"
+                aria-labelledby="count-label"
+                onKeyDown={moveCount}
+              >
+                {COUNTS.map((n) => (
+                  <button
+                    type="button"
+                    key={n}
+                    role="radio"
+                    className="pick"
+                    aria-checked={count === n}
+                    tabIndex={count === n ? 0 : -1}
+                    onClick={() => pickCount(n)}
+                  >
+                    {n === 0 ? `Toàn bộ (${bank.total})` : n}
+                  </button>
+                ))}
+              </div>
+            </div>
 
-        <div className="field">
-          <span id="shuffle-label">Tuỳ chọn</span>
-          <label className="switch" htmlFor="shuffle">
-            <input
-              id="shuffle"
-              type="checkbox"
-              checked={shuffle}
-              onChange={(e) => setShuffle(e.target.checked)}
-            />
-            Xáo trộn thứ tự câu hỏi
-          </label>
-        </div>
-      </section>
+            <div className="field">
+              <label htmlFor="minutes">Thời gian làm bài</label>
+              <select
+                id="minutes"
+                value={minutes}
+                disabled={mode === 'practice'}
+                onChange={(e) => setMinutes(Number(e.target.value))}
+              >
+                {MINUTES.map((m) => (
+                  <option key={m} value={m}>
+                    {m === 0 ? 'Không giới hạn' : `${m} phút`}
+                  </option>
+                ))}
+              </select>
+              {mode === 'practice' && <p className="field__note">Chỉ áp dụng cho Thi thử</p>}
+            </div>
 
-      <div className="home__cta">
+            <div className="field">
+              <label htmlFor="shuffle" className="switch">
+                <input
+                  id="shuffle"
+                  type="checkbox"
+                  role="switch"
+                  aria-checked={shuffle}
+                  checked={shuffle}
+                  onChange={(e) => setShuffle(e.target.checked)}
+                />
+                <span className="switch__track" aria-hidden="true" />
+                <span className="switch__text">Xáo trộn thứ tự câu hỏi</span>
+              </label>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div className="actionbar home__bar">
+        <p className="home__bar-sum">
+          <span className="num">{size}</span> câu, {mode === 'practice' ? 'Luyện tập' : 'Thi thử'}
+          {timed ? (
+            <>
+              , <span className="num">{minutes}</span> phút
+            </>
+          ) : (
+            ', không giới hạn'
+          )}
+        </p>
         <button
           type="button"
           className="btn btn--primary"
-          onClick={() => onStart({ bankId, mode, count: size, shuffle, minutes: mode === 'exam' ? minutes : 0 })}
+          onClick={() =>
+            onStart({ bankId, mode, count: size, shuffle, minutes: mode === 'exam' ? minutes : 0 })
+          }
         >
           Bắt đầu làm bài
         </button>
-        <p className="hint">
-          {size} câu · {mode === 'practice' ? 'Luyện tập' : minutes === 0 ? 'Không giới hạn thời gian' : `${minutes} phút`}
-        </p>
       </div>
     </div>
   );

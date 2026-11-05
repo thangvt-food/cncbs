@@ -66,7 +66,7 @@ export default function App() {
       {session && (
         <header className="masthead" data-group={bank.group}>
           <span className="masthead__brand">
-            Luyện thi <span className="num">CBTP</span>
+            Luyện thi <span className="num">210339</span>
           </span>
           <span className="chip chip--solid">{bank.short}</span>
           <span className="masthead__spacer" />

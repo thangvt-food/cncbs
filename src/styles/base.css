@@ -148,6 +148,17 @@ textarea {
   color: var(--text-1);
 }
 
+.btn--light {
+  border-color: color-mix(in oklab, var(--on-board) 45%, transparent);
+  background: var(--on-board);
+  color: var(--board);
+  font-weight: 700;
+}
+
+.btn--light:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--on-board) 88%, var(--board));
+}
+
 .btn--ghost:hover:not(:disabled) {
   background: color-mix(in oklab, var(--ink) 8%, transparent);
 }
