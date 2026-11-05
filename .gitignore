@@ -3,3 +3,7 @@ dist
 *.log
 .DS_Store
 .qoder/
+
+# Tài liệu cá nhân và slide bản quyền — chỉ giữ trên máy
+materials/
+data/sources/archive/

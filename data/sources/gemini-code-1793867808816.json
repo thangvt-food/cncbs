@@ -1,0 +1,426 @@
+{
+  "ten_de": "Bộ 60 câu hỏi chuyên ngành Công nghệ Chế biến Sữa & Vi sinh",
+  "tong_so_cau": 60,
+  "cau_hoi": [
+    {
+      "id": 1,
+      "loai": "single_choice",
+      "cau_hoi": "Số nguyên tố N trong 1 phân tử melamine là:",
+      "cac_lua_chon": ["A: 3", "B: 6", "C: 9", "D: 12"],
+      "dap_an": "B: 6"
+    },
+    {
+      "id": 2,
+      "loai": "single_choice",
+      "cau_hoi": "pH thấp nhất mà Clostridium botulinum có thể phát triển:",
+      "cac_lua_chon": ["A: 6,6", "B: 5,6", "C: 4,6", "D: 3,6"],
+      "dap_an": "C: 4,6"
+    },
+    {
+      "id": 3,
+      "loai": "single_choice",
+      "cau_hoi": "Loại nước nào cho hoạt độ nước lớn nhất:",
+      "cac_lua_chon": ["A: nước tự do", "B: nước đa lớp", "C: nước đơn lớp", "D: các loại nước cho hoạt độ nước như nhau"],
+      "dap_an": "A: nước tự do"
+    },
+    {
+      "id": 4,
+      "loai": "single_choice",
+      "cau_hoi": "Các yếu tố ngoại tại (extrinsic factors) ảnh hưởng đến sự phát triển của vi sinh vật:",
+      "cac_lua_chon": ["A: ẩm tương đối không khí xung quanh thực phẩm", "B: nhiệt độ bảo quản", "C: thành phần không khí xung quanh thực phẩm", "D: cả A, B và C"],
+      "dap_an": "D: cả A, B và C"
+    },
+    {
+      "id": 5,
+      "loai": "single_choice",
+      "cau_hoi": "Thực hiện MAP với sản phẩm chế biến từ sữa thường:",
+      "cac_lua_chon": ["A: giảm hàm lượng oxy xung quanh thực phẩm", "B: tăng hàm lượng oxy xung quanh thực phẩm", "C: tăng hàm lượng carbon dioxide (CO2) xung quanh thực phẩm", "D: A và C đúng"],
+      "dap_an": "D: A và C đúng"
+    },
+    {
+      "id": 6,
+      "loai": "single_choice",
+      "cau_hoi": "Nhóm vi sinh vật gây nguy hại cho người sử dụng nhất khi phát triển trong thực phẩm:",
+      "cac_lua_chon": ["A: gây hư hỏng", "B: gây bệnh", "C: chủng lên men", "D: cả ba nhóm trên"],
+      "dap_an": "B: gây bệnh"
+    },
+    {
+      "id": 7,
+      "loai": "single_choice",
+      "cau_hoi": "Quá trình ly tâm tách kem trong công nghiệp chế biến sữa thường được thực hiện ở:",
+      "cac_lua_chon": ["A: 15°C", "B: 25°C", "C: 35°C", "D: 45°C"],
+      "dap_an": "D: 45°C"
+    },
+    {
+      "id": 8,
+      "loai": "single_choice",
+      "cau_hoi": "Độ tách kem E của quá trình ly tâm tách kem được tính bằng:",
+      "cac_lua_chon": ["A: tổng béo trong kem tách được/tổng béo có trong sữa nguyên béo ban đầu", "B: tổng béo có trong sữa nguyên béo ban đầu/ tổng béo trong kem tách được", "C: cả A và B đều đúng", "D: cả A và B đều sai"],
+      "dap_an": "A: tổng béo trong kem tách được/tổng béo có trong sữa nguyên béo ban đầu"
+    },
+    {
+      "id": 9,
+      "loai": "single_choice",
+      "cau_hoi": "Lớp ngoài cùng của màng tế bào vi khuẩn Gram dương (+) là:",
+      "cac_lua_chon": ["A: lipopolysaccharide", "B: peptidoglycan", "C: collagen", "D: keratin"],
+      "dap_an": "B: peptidoglycan"
+    },
+    {
+      "id": 10,
+      "loai": "single_choice",
+      "cau_hoi": "Thực hiện MAP với sản phẩm chế biến từ sữa có tác dụng:",
+      "cac_lua_chon": ["A: tăng độ bền oxi hóa cho sản phẩm", "B: giảm sự phát triển vi sinh vật", "C: A và B đúng", "D: A và B sai"],
+      "dap_an": "C: A và B đúng"
+    },
+    {
+      "id": 11,
+      "loai": "single_choice",
+      "cau_hoi": "Vi khuẩn sinh nội bào tử gồm:",
+      "cac_lua_chon": ["A: Bacilli", "B: Clostridia", "C: Cả A và B", "D: A hoặc B tùy khi chúng là vi khuẩn hoặc khi là nấm men"],
+      "dap_an": "C: Cả A và B"
+    },
+    {
+      "id": 12,
+      "loai": "single_choice",
+      "cau_hoi": "Trong buồng đóng gói vô trùng, áp suất khí được duy trì:",
+      "cac_lua_chon": ["A: cao hơn áp suất khí quyển", "B: thấp hơn áp suất khí quyển", "C: bằng áp suất khí quyển", "D: B và C đúng"],
+      "dap_an": "A: cao hơn áp suất khí quyển"
+    },
+    {
+      "id": 13,
+      "loai": "single_choice",
+      "cau_hoi": "Nhóm vi sinh vật có khả năng cao nhất gây hư hỏng sữa thanh trùng bảo quản lạnh là:",
+      "cac_lua_chon": ["A: ưa lạnh", "B: chịu lạnh", "C: ưa ẩm", "D: ưa nhiệt"],
+      "dap_an": "B: chịu lạnh"
+    },
+    {
+      "id": 14,
+      "loai": "single_choice",
+      "cau_hoi": "Lactobacillus delbrueckii spp. bulgaricus là chủng:",
+      "cac_lua_chon": ["A: ưa nhiệt", "B: ưa ẩm", "C: ưa lạnh", "D: chịu lạnh"],
+      "dap_an": "A: ưa nhiệt"
+    },
+    {
+      "id": 15,
+      "loai": "single_choice",
+      "cau_hoi": "Hàm lượng ẩm của thực phẩm là:",
+      "cac_lua_chon": ["A: tỷ lệ giữa hàm lượng ẩm căn bản ướt và căn bản khô", "B: tỷ lệ giữa lượng nước và tổng lượng thực phẩm", "C: tỷ lệ giữa áp suất hơi nước thực phẩm và nước tinh khiết", "D: hàm lượng chất hòa tan trong thực phẩm"],
+      "dap_an": "B: tỷ lệ giữa lượng nước và tổng lượng thực phẩm"
+    },
+    {
+      "id": 16,
+      "loai": "single_choice",
+      "cau_hoi": "Vắt sữa có thể được thực hiện:",
+      "cac_lua_chon": ["A: bằng tay", "B: bằng máy vắt sữa", "C: bằng robot", "D: tất cả"],
+      "dap_an": "D: tất cả"
+    },
+    {
+      "id": 17,
+      "loai": "single_choice",
+      "cau_hoi": "Nguồn lây nhiễm chính nhất của Salmonella vào thực phẩm:",
+      "cac_lua_chon": ["A: đất và nước", "B: phân (đường ruột)", "C: dụng cụ chế biến", "D: Salmonella hiếm khi nhiễm vào thực phẩm"],
+      "dap_an": "B: phân (đường ruột)"
+    },
+    {
+      "id": 18,
+      "loai": "single_choice",
+      "cau_hoi": "Các yếu tố nội tại (intrinsic factors) ảnh hưởng đến sự phát triển của vi sinh vật:",
+      "cac_lua_chon": ["A: Hoạt độ nước", "B: nhiệt độ bảo quản", "C: thành phần không khí xung quanh thực phẩm", "D: Cả A, B và C"],
+      "dap_an": "A: Hoạt độ nước"
+    },
+    {
+      "id": 19,
+      "loai": "single_choice",
+      "cau_hoi": "Nhiệt độ thấp nhất mà dưới đó vi sinh vật không phát triển được:",
+      "cac_lua_chon": ["A: 63 độ C", "B: 7 độ C", "C: 0 độ C", "D: - 18 độ C"],
+      "dap_an": "D: - 18 độ C"
+    },
+    {
+      "id": 20,
+      "loai": "single_choice",
+      "cau_hoi": "Vi khuẩn phát triển ở hoạt độ nước thấp được gọi là:",
+      "cac_lua_chon": ["A: Halophilic bacteria", "B: Xerophilic molds", "C: Osmophilic yeasts", "D: vi khuẩn hiếu khí"],
+      "dap_an": "A: Halophilic bacteria"
+    },
+    {
+      "id": 21,
+      "loai": "single_choice",
+      "cau_hoi": "Nhóm vi sinh vật hiếu khí bắt buộc:",
+      "cac_lua_chon": ["A: nấm mốc", "B: nấm men", "C: vi khuẩn lactic", "D: tất cả đều đúng"],
+      "dap_an": "A: nấm mốc"
+    },
+    {
+      "id": 22,
+      "loai": "single_choice",
+      "cau_hoi": "Nhóm vi sinh vật nào có thể phát triển được ở hoạt độ nước nhỏ nhất:",
+      "cac_lua_chon": ["A: vi khuẩn", "B: nấm men", "C: nấm mốc", "D: cả ba nhóm có khả năng như nhau"],
+      "dap_an": "C: nấm mốc"
+    },
+    {
+      "id": 23,
+      "loai": "single_choice",
+      "cau_hoi": "Đóng gói chân không (vacuum packaging):",
+      "cac_lua_chon": ["A: giảm oxi hóa sản phẩm", "B: giảm phát triển vi sinh vật hiếu khí", "C: A và B đúng", "D: A và B sai"],
+      "dap_an": "C: A và B đúng"
+    },
+    {
+      "id": 24,
+      "loai": "single_choice",
+      "cau_hoi": "So sánh chung về độ chịu pH thấp:",
+      "cac_lua_chon": ["A: nấm men < vi khuẩn", "B: nấm men = vi khuẩn", "C: nấm men > vi khuẩn", "D: A và B đúng"],
+      "dap_an": "C: nấm men > vi khuẩn"
+    },
+    {
+      "id": 25,
+      "loai": "single_choice",
+      "cau_hoi": "Trong máy đồng hóa sữa 3 bơm pít-tông, các bơm hoạt động lệch pha nhau:",
+      "cac_lua_chon": ["A: 0° (đồng pha)", "B: 60°", "C: 120°", "D: 180°"],
+      "dap_an": "C: 120°"
+    },
+    {
+      "id": 26,
+      "loai": "single_choice",
+      "cau_hoi": "Nhóm vi sinh vật có nhiệt độ phát triển tối ưu cao nhất:",
+      "cac_lua_chon": ["A: ưa lạnh", "B: chịu lạnh", "C: ưa ẩm", "D: ưa nhiệt"],
+      "dap_an": "D: ưa nhiệt"
+    },
+    {
+      "id": 27,
+      "loai": "single_choice",
+      "cau_hoi": "Mục đích chính của thanh trùng là để:",
+      "cac_lua_chon": ["A: Tiêu diệt vi sinh vật gây bệnh", "B: Tiêu diệt bào tử vi sinh vật", "C: Ức chế enzyme sản sinh bởi Pseudomonas", "D: Tất cả đều đúng"],
+      "dap_an": "A: Tiêu diệt vi sinh vật gây bệnh"
+    },
+    {
+      "id": 28,
+      "loai": "single_choice",
+      "cau_hoi": "Ngộ độc thực phẩm là do sử dụng thực phẩm:",
+      "cac_lua_chon": ["A: có vi sinh vật gây hư hỏng", "B: có vi sinh vật bổ sung để lên men", "C: có sự phát triển vượt mức của vi sinh vật gây bệnh", "D: cả ba đều đúng"],
+      "dap_an": "C: có sự phát triển vượt mức của vi sinh vật gây bệnh"
+    },
+    {
+      "id": 29,
+      "loai": "single_choice",
+      "cau_hoi": "So với sữa thô, sữa đồng hóa có độ bền nhũ tương:",
+      "cac_lua_chon": ["A: thấp hơn", "B: cao hơn", "C: thấp hơn khi bảo quản ở 4°C", "D: cao hơn khi ở nhiệt độ phòng"],
+      "dap_an": "B: cao hơn"
+    },
+    {
+      "id": 30,
+      "loai": "single_choice",
+      "cau_hoi": "Tiệt trùng sữa trong bao bì thường được thực hiện ở điều kiện:",
+      "cac_lua_chon": ["A: 62-65°C, 30 phút", "B: 72-76°C, 15-40 giây", "C: 85-90°C, 1-4 giây", "D: 109-115°C, 20-40 phút"],
+      "dap_an": "D: 109-115°C, 20-40 phút"
+    },
+    {
+      "id": 31,
+      "loai": "single_choice",
+      "cau_hoi": "Quá trình nào làm tăng hoạt độ nước trong sữa cô đặc:",
+      "cac_lua_chon": ["A: sấy khô", "B: thêm nước", "C: thêm muối", "D: A và C"],
+      "dap_an": "B: thêm nước"
+    },
+    {
+      "id": 32,
+      "loai": "single_choice",
+      "cau_hoi": "Nhóm vi sinh vật có khả năng phát triển trong sữa và các sản phẩm từ sữa:",
+      "cac_lua_chon": ["A: hiếu khí bắt buộc", "B: kị khí bắt buộc", "C: kị khí tùy tiện", "D: cả ba nhóm trên"],
+      "dap_an": "D: cả ba nhóm trên"
+    },
+    {
+      "id": 33,
+      "loai": "true_false",
+      "cau_hoi": "Béo còn sót lại trong sữa gầy chứa các hạt cầu béo lớn",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 34,
+      "loai": "true_false",
+      "cau_hoi": "Sữa sau khi được vắt nên đưa về 4°C nhanh nhất có thể",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 35,
+      "loai": "true_false",
+      "cau_hoi": "Sữa UHT có giá trị dinh dưỡng cao hơn sữa tiệt trùng gián tiếp bình thường",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 36,
+      "loai": "true_false",
+      "cau_hoi": "Tốc độ gia nhiệt lên nhiệt độ xử lý UHT trong quá trình UHT trực tiếp chậm hơn quá trình UHT gián tiếp",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 37,
+      "loai": "true_false",
+      "cau_hoi": "Trong sản xuất yaourt casein đông tụ theo cơ chế do enzyme rennet",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 38,
+      "loai": "true_false",
+      "cau_hoi": "Sữa UHT trực tiếp có giá trị dinh dưỡng cao hơn sữa UHT gián tiếp",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 39,
+      "loai": "true_false",
+      "cau_hoi": "Trong ly tâm tách béo từ sữa, chất béo bị đẩy ra biên trong khi sữa gầy bị nén vào gần trục quay",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 40,
+      "loai": "true_false",
+      "cau_hoi": "Tiệt trùng sữa tiêu diệt hoàn toàn vi sinh vật và ức hoạt hoàn toàn các enzyme có trong sữa",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 41,
+      "loai": "true_false",
+      "cau_hoi": "Tỷ trọng của sữa tách kem lớn hơn tỷ trọng của sữa thô nguyên kem ban đầu",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 42,
+      "loai": "multiple_select",
+      "cau_hoi": "Quá trình xử lý nhiệt ..... có thể được chia thành ba kỹ thuật là LTLT, HTST và flash.",
+      "cac_lua_chon": ["xử lý nhiệt nhẹ", "thanh trùng", "tiệt trùng (thường)", "UHT"],
+      "dap_an": ["thanh trùng"]
+    },
+    {
+      "id": 43,
+      "loai": "multiple_select",
+      "cau_hoi": "Các quá trình xử lý nhiệt trong công nghiệp chế biến sữa gồm có:",
+      "cac_lua_chon": ["xử lý nhiệt nhẹ", "thanh trùng", "tiệt trùng (thường)", "UHT"],
+      "dap_an": ["xử lý nhiệt nhẹ", "thanh trùng", "tiệt trùng (thường)", "UHT"]
+    },
+    {
+      "id": 44,
+      "loai": "multiple_select",
+      "cau_hoi": "Các quá trình ức hoạt được enzyme phosphatase là:",
+      "cac_lua_chon": ["xử lý nhiệt nhẹ", "thanh trùng", "tiệt trùng (thường)", "UHT"],
+      "dap_an": ["thanh trùng", "tiệt trùng (thường)", "UHT"]
+    },
+    {
+      "id": 45,
+      "loai": "multiple_select",
+      "cau_hoi": "Mức độ tiêu diệt vi sinh vật là tương đồng nhưng hạn sử dụng của sữa ... là ngắn hơn sữa tiệt trùng sau rót do enzyme chịu nhiệt chưa ức hoạt hết:",
+      "cac_lua_chon": ["xử lý nhiệt nhẹ", "thanh trùng", "tiệt trùng (thường)", "UHT"],
+      "dap_an": ["UHT"]
+    },
+    {
+      "id": 46,
+      "loai": "multiple_select",
+      "cau_hoi": "Theo quy định thì không được ức hoạt hoàn toàn enzyme phosphatase:",
+      "cac_lua_chon": ["xử lý nhiệt nhẹ", "thanh trùng", "tiệt trùng (thường)", "UHT"],
+      "dap_an": ["xử lý nhiệt nhẹ"]
+    },
+    {
+      "id": 47,
+      "loai": "single_choice",
+      "cau_hoi": "Thành phần casein nào nằm ở bề mặt micelle và giữ vai trò ổn định cấu trúc chống keo tụ:",
+      "cac_lua_chon": ["A: Alpha-s1 casein", "B: Alpha-s2 casein", "C: Beta-casein", "D: Kappa-casein"],
+      "dap_an": "D: Kappa-casein"
+    },
+    {
+      "id": 48,
+      "loai": "single_choice",
+      "cau_hoi": "Khi sữa bị nhiễm mastitis (viêm vú), sự thay đổi nào sau đây thường xảy ra:",
+      "cac_lua_chon": ["A: Tỷ lệ Cl/lactose tăng và hàm lượng tế bào soma tăng cao", "B: Hàm lượng lactose tăng vọt", "C: Điểm đông đặc hạ sâu", "D: pH của sữa giảm mạnh dưới 5.5"],
+      "dap_an": "A: Tỷ lệ Cl/lactose tăng và hàm lượng tế bào soma tăng cao"
+    },
+    {
+      "id": 49,
+      "loai": "single_choice",
+      "cau_hoi": "Điểm đóng băng (freezing point) tiêu chuẩn của sữa bò tươi bình thường nằm trong khoảng:",
+      "cac_lua_chon": ["A: -0,512°C đến -0,550°C", "B: 0,0°C", "C: -1,5°C đến -2,0°C", "D: -0,100°C đến -0,250°C"],
+      "dap_an": "A: -0,512°C đến -0,550°C"
+    },
+    {
+      "id": 50,
+      "loai": "single_choice",
+      "cau_hoi": "Khi gian lận pha thêm nước vào sữa tươi, giá trị điểm đóng băng của sữa sẽ biến đổi thế nào:",
+      "cac_lua_chon": ["A: Dịch chuyển dần về gần 0°C (tăng lên)", "B: Giảm sâu hơn âm nhiều hơn", "C: Không đổi", "D: Biến thiên bất thường"],
+      "dap_an": "A: Dịch chuyển dần về gần 0°C (tăng lên)"
+    },
+    {
+      "id": 51,
+      "loai": "single_choice",
+      "cau_hoi": "Acid béo no có mạch carbon ngắn và nhiệt độ nóng chảy thấp nhất trong chất béo sữa là:",
+      "cac_lua_chon": ["A: Butyric acid (C4:0)", "B: Palmitic acid (C16:0)", "C: Stearic acid (C18:0)", "D: Oleic acid (C18:1)"],
+      "dap_an": "A: Butyric acid (C4:0)"
+    },
+    {
+      "id": 52,
+      "loai": "single_choice",
+      "cau_hoi": "Tỷ trọng của sữa bò tươi đo ở 20°C thường dao động trong khoảng:",
+      "cac_lua_chon": ["A: 1,028 - 1,034 g/cm3", "B: 0,920 - 0,940 g/cm3", "C: 1,050 - 1,080 g/cm3", "D: 0,998 - 1,000 g/cm3"],
+      "dap_an": "A: 1,028 - 1,034 g/cm3"
+    },
+    {
+      "id": 53,
+      "loai": "single_choice",
+      "cau_hoi": "Đường lactose là một disaccharide được cấu tạo từ hai gốc monosaccharide nào:",
+      "cac_lua_chon": ["A: Glucose và Galactose", "B: Glucose và Fructose", "C: Glucose và Glucose", "D: Galactose và Fructose"],
+      "dap_an": "A: Glucose và Galactose"
+    },
+    {
+      "id": 54,
+      "loai": "single_choice",
+      "cau_hoi": "Enzyme nội sinh trong sữa nhạy cảm với nhiệt độ và được dùng để đánh giá hiệu quả quá trình thanh trùng sữa là:",
+      "cac_lua_chon": ["A: Alkaline phosphatase", "B: Lipase", "C: Lactoperoxidase", "D: Catalase"],
+      "dap_an": "A: Alkaline phosphatase"
+    },
+    {
+      "id": 55,
+      "loai": "single_choice",
+      "cau_hoi": "Phương pháp màng Microfiltration (MF) kích thước lỗ 1.4 µm trong công nghiệp sữa được dùng hiệu quả nhất để:",
+      "cac_lua_chon": ["A: Tách loại vi khuẩn và bào tử vi sinh vật trong sữa gầy", "B: Tách đường lactose", "C: Khử khoáng đơn hóa trị", "D: Cô đặc whey protein"],
+      "dap_an": "A: Tách loại vi khuẩn và bào tử vi sinh vật trong sữa gầy"
+    },
+    {
+      "id": 56,
+      "loai": "single_choice",
+      "cau_hoi": "Quá trình Ultrafiltration (UF) cho phép thành phần nào sau đây đi qua màng vào dòng permeate:",
+      "cac_lua_chon": ["A: Lactose, muối khoáng hòa tan và nước", "B: Micelle casein", "C: Cầu béo", "D: Whey protein"],
+      "dap_an": "A: Lactose, muối khoáng hòa tan và nước"
+    },
+    {
+      "id": 57,
+      "loai": "single_choice",
+      "cau_hoi": "Để thu hồi nước và cô đặc dung dịch permeate từ quá trình UF mà không dùng nhiệt, người ta sử dụng màng:",
+      "cac_lua_chon": ["A: Reverse Osmosis (RO)", "B: Microfiltration (MF)", "C: Lọc khung bản thô", "D: Lọc trọng lực"],
+      "dap_an": "A: Reverse Osmosis (RO)"
+    },
+    {
+      "id": 58,
+      "loai": "single_choice",
+      "cau_hoi": "Hiện tượng bám bẩn màng (fouling) trong quá trình lọc tiếp tuyến sữa chủ yếu do sự tích tụ của:",
+      "cac_lua_chon": ["A: Protein và muối khoáng canxi phosphate", "B: Lactose tự do", "C: Vitamin tan trong nước", "D: Nước tinh khiết"],
+      "dap_an": "A: Protein và muối khoáng canxi phosphate"
+    },
+    {
+      "id": 59,
+      "loai": "single_choice",
+      "cau_hoi": "Protein huyết thanh sữa (Whey protein) chiếm khoảng bao nhiêu % tổng lượng protein có trong sữa bò tươi:",
+      "cac_lua_chon": ["A: ~20%", "B: ~80%", "C: ~50%", "D: ~5%"],
+      "dap_an": "A: ~20%"
+    },
+    {
+      "id": 60,
+      "loai": "single_choice",
+      "cau_hoi": "Khi sản xuất sữa bột sấy phun, công đoạn cô đặc chân không sơ bộ giúp nâng nồng độ chất khô của sữa lên khoảng:",
+      "cac_lua_chon": ["A: 45 - 52%", "B: 15 - 20%", "C: 70 - 80%", "D: 95 - 98%"],
+      "dap_an": "A: 45 - 52%"
+    }
+  ]
+}

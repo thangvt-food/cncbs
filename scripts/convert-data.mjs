@@ -3,24 +3,24 @@ import { dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
+const sourcesDir = resolve(root, 'data/sources');
 
 const SOURCES = [
   {
     id: 'sua-vsv',
-    path: '/home/yan/Downloads/gemini-code-1793867808816.json',
-    fallbackTitle: 'Công nghệ Chế biến Sữa & Vi sinh',
+    path: resolve(sourcesDir, 'gemini-code-1793867808816.json'),
+    title: 'Thi giữa kỳ môn Sữa lần 1',
   },
   {
     id: 'tong-hop-dot-3',
-    path: '/home/yan/Downloads/gemini-code-1793869261405.json',
-    fallbackTitle: 'Trắc nghiệm Tổng hợp Đợt 3',
+    path: resolve(sourcesDir, 'gemini-code-1793869261405.json'),
+    title: 'Thi giữa kỳ môn Sữa lần 2',
   },
   {
     id: 'nguyen-ly-ktpb',
-    path: '/home/yan/Downloads/gemini-code-1793867812110.json',
-    fallbackTitle: 'Nguyên lý Kỹ thuật Chế biến Thực phẩm',
+    path: resolve(sourcesDir, 'gemini-code-1793874992421.json'),
+    title: 'Kỹ thuật Thực phẩm 2 (giữa kỳ)',
   },
-  { id: 'thi-lan-1', path: resolve(root, 'thi-lan1.json'), fallbackTitle: 'Đề thi lần 1' },
 ];
 
 const norm = (s) =>
@@ -68,13 +68,38 @@ function extractObjects(text) {
   }).filter(Boolean);
 }
 
-function fromGemini(raw) {
-  const typeMap = { single_choice: 'single', true_false: 'true_false', multiple_select: 'multi' };
+// matching_item không có lựa chọn kèm theo: gom mọi đáp án của cả nhóm làm một pool chung,
+// mỗi câu thành một câu một-đáp-án chọn từ pool đó.
+function matchingPool(raws) {
+  const seen = new Map();
+  for (const raw of raws) {
+    if (raw.loai !== 'matching_item') continue;
+    const list = Array.isArray(raw.dap_an) ? raw.dap_an : [raw.dap_an];
+    for (const a of list) {
+      const text = String(a ?? '').trim();
+      if (text && !seen.has(norm(text))) seen.set(norm(text), text);
+    }
+  }
+  return [...seen.values()].map((text, i) => ({ key: String.fromCharCode(65 + i), text }));
+}
+
+function fromGemini(raw, pool = []) {
+  const typeMap = {
+    single_choice: 'single',
+    true_false: 'true_false',
+    multiple_select: 'multi',
+    matching_item: 'single',
+  };
   const type = typeMap[raw.loai] ?? 'single';
-  const listed = (raw.cac_lua_chon ?? []).map((opt, i) => {
-    const m = /^([A-Z])\s*[:.]\s*(.*)$/s.exec(String(opt).trim());
-    return m && i < 26 ? { key: m[1], text: m[2].trim() } : { key: String.fromCharCode(65 + i), text: String(opt).trim() };
-  });
+  const listed =
+    raw.loai === 'matching_item'
+      ? pool
+      : (raw.cac_lua_chon ?? []).map((opt, i) => {
+          const m = /^([A-Z])\s*[:.]\s*(.*)$/s.exec(String(opt).trim());
+          return m && i < 26
+            ? { key: m[1], text: m[2].trim() }
+            : { key: String.fromCharCode(65 + i), text: String(opt).trim() };
+        });
   const answerList = Array.isArray(raw.dap_an) ? raw.dap_an : [raw.dap_an];
   const answers = [];
   for (const a of answerList) {
@@ -117,10 +142,11 @@ const banks = SOURCES.map((src, i) => {
   } catch {
     parsed = null;
   }
-  const title = parsed?.ten_de ?? src.fallbackTitle;
+  const title = src.title ?? parsed?.ten_de;
   const isArraySource = Array.isArray(parsed);
   const raws = isArraySource ? parsed : extractObjects(text) ?? parsed?.cau_hoi ?? [];
-  const questions = raws.map((raw) => (isArraySource ? fromThiLan1(raw) : fromGemini(raw)));
+  const pool = isArraySource ? [] : matchingPool(raws);
+  const questions = raws.map((raw) => (isArraySource ? fromThiLan1(raw) : fromGemini(raw, pool)));
   questions.forEach((q) => {
     q.id = `${src.id}-${q.id}`;
     q.bank = src.id;
