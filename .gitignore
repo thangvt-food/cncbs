@@ -4,6 +4,6 @@ dist
 .DS_Store
 .qoder/
 
-# Tài liệu cá nhân và slide bản quyền — chỉ giữ trên máy
-materials/
+# Slide, đề kiểm tra và hồ sơ cá nhân để ngoài repo, không bao giờ commit
+*.pdf
 data/sources/archive/

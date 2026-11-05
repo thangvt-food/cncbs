@@ -47,7 +47,6 @@ src/data/banks.json   toàn bộ câu hỏi, sinh từ script
 src/styles/           tokens.css, base.css, app.css
 scripts/              convert-data.mjs
 data/sources/         tệp nguồn không đổi định dạng
-materials/            slide, đề kiểm tra, hồ sơ cá nhân — không commit
 ```
 
 ## Giao diện
