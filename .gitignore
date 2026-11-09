@@ -1,0 +1,14 @@
+node_modules
+dist
+*.log
+.DS_Store
+# Settings local của agent; skill thì đi cùng repo nên chừa riêng thư mục skills
+.qoder/*
+!.qoder/skills/
+
+# Slide, đề kiểm tra và hồ sơ cá nhân để ngoài repo, không bao giờ commit
+*.pdf
+data/sources/archive/
+
+# Đồ thị phân tích repo do graphify sinh — tái tạo được bằng /graphify, không commit
+graphify-out/

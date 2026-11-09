@@ -1,0 +1,267 @@
+/* Mục hướng dẫn thực hành — font đẹp, dễ đọc, scale tốt cho mobile. */
+.guide {
+  --guide-font-body: 'Literata', 'Noto Serif', Georgia, serif;
+  --guide-font-ui: 'Be Vietnam Pro', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --guide-font-num: 'Barlow Condensed', 'Be Vietnam Pro', sans-serif;
+
+  font-family: var(--guide-font-body);
+  font-size: clamp(16px, 1.6vw + 12px, 19px);
+  line-height: 1.7;
+  color: var(--text-1);
+  max-width: 760px;
+  margin: 0 auto;
+  padding: var(--sp-4) var(--sp-4) var(--sp-7);
+  word-wrap: break-word;
+  overflow-wrap: anywhere;
+}
+
+.guide__top {
+  padding: var(--sp-5) 0 var(--sp-4);
+  border-bottom: 1px solid var(--hair);
+  margin-bottom: var(--sp-4);
+}
+
+.guide__back {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-height: var(--tap);
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r-ctl);
+  background: var(--surface);
+  color: var(--text-1);
+  font-family: var(--guide-font-ui);
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--dur-1) var(--ease), transform var(--dur-1) var(--ease);
+}
+
+.guide__back:hover {
+  background: var(--surface-sunken);
+}
+
+.guide__back:active {
+  transform: translateY(1px);
+}
+
+.guide__eyebrow {
+  font-family: var(--guide-font-ui);
+  font-size: var(--fs-meta);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: var(--sp-3) 0 var(--sp-1);
+}
+
+.guide__title {
+  font-family: var(--guide-font-ui);
+  font-size: clamp(26px, 6vw, 42px);
+  line-height: 1.15;
+  font-weight: 700;
+  margin: var(--sp-1) 0 var(--sp-3);
+  color: var(--ink);
+}
+
+.guide__lede {
+  font-size: clamp(15px, 2.4vw, 18px);
+  line-height: 1.6;
+  color: var(--text-2);
+  margin: 0;
+}
+
+.guide__toc {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  padding: var(--sp-3) 0;
+  margin-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--hair);
+}
+
+.guide__toc-btn {
+  min-height: 36px;
+  padding: 6px 12px;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-2);
+  font-family: var(--guide-font-ui);
+  font-size: 13px;
+  cursor: pointer;
+  transition: background var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+
+.guide__toc-btn:hover {
+  background: var(--board);
+  color: var(--on-board);
+  border-color: var(--board);
+}
+
+.guide__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.guide__section {
+  scroll-margin-top: var(--sp-5);
+}
+
+.guide__h2 {
+  font-family: var(--guide-font-ui);
+  font-size: clamp(20px, 4vw, 26px);
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--ink);
+  margin: 0 0 var(--sp-3);
+  padding-bottom: var(--sp-2);
+  border-bottom: 2px solid var(--board);
+}
+
+.guide__h3 {
+  font-family: var(--guide-font-ui);
+  font-size: clamp(16px, 3vw, 19px);
+  line-height: 1.3;
+  font-weight: 600;
+  color: var(--board);
+  margin: var(--sp-3) 0 var(--sp-2);
+}
+
+.guide__p {
+  margin: 0 0 var(--sp-3);
+  text-align: justify;
+  hyphens: auto;
+}
+
+.guide__list {
+  margin: 0 0 var(--sp-3);
+  padding-left: var(--sp-5);
+}
+
+.guide__li {
+  margin-bottom: var(--sp-2);
+  line-height: 1.65;
+}
+
+.guide__li::marker {
+  color: var(--board);
+}
+
+.guide__recipe {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.guide__recipe-item {
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-left: 4px solid var(--turmeric);
+  border-radius: var(--r-ctl);
+  padding: var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+
+.guide__recipe-name {
+  font-family: var(--guide-font-ui);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.guide__recipe-detail {
+  font-size: 0.95em;
+  color: var(--text-2);
+}
+
+.guide__steps {
+  margin: 0 0 var(--sp-3);
+  padding-left: var(--sp-5);
+  counter-reset: step;
+}
+
+.guide__step {
+  margin-bottom: var(--sp-2);
+  line-height: 1.65;
+}
+
+.guide__sub {
+  margin-bottom: var(--sp-4);
+}
+
+.guide__note {
+  font-style: italic;
+  font-size: 0.9em;
+  color: var(--muted);
+  border-top: 1px dashed var(--hair);
+  padding-top: var(--sp-3);
+  margin-top: var(--sp-4);
+}
+
+.guide__foot {
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--hair);
+  display: flex;
+  justify-content: center;
+}
+
+.guide__back--foot {
+  width: 100%;
+  max-width: 320px;
+  justify-content: center;
+}
+
+/* CTA trên trang chủ */
+.practice-guide-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  flex-wrap: wrap;
+  padding: var(--sp-4);
+  border: 1px solid var(--hair);
+  border-radius: var(--r-card);
+  background: var(--surface);
+}
+
+.practice-guide-cta__body h2 {
+  font-family: var(--guide-font-ui, 'Be Vietnam Pro', system-ui, sans-serif);
+  font-size: var(--fs-title);
+  margin: 0 0 var(--sp-1);
+  color: var(--ink);
+}
+
+.practice-guide-cta__body .meta {
+  margin: 0;
+}
+
+/* Mobile scaling */
+@media (max-width: 640px) {
+  .guide {
+    padding: var(--sp-3) var(--sp-3) var(--sp-6);
+  }
+  .guide__toc {
+    gap: var(--sp-1);
+  }
+  .guide__toc-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+  .guide__list,
+  .guide__steps {
+    padding-left: var(--sp-4);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .guide__recipe-item {
+    background: var(--surface-sunken);
+  }
+}

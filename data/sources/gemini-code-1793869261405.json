@@ -1,0 +1,370 @@
+{
+  "ten_de": "Bộ 52 câu hỏi Trắc nghiệm Tổng hợp Đợt 3",
+  "tong_so_cau": 52,
+  "cau_hoi": [
+    {
+      "id": 1,
+      "loai": "single_choice",
+      "cau_hoi": "Phương pháp màng nào có áp suất vận hành (TMP) cao nhất trong các quá trình màng điều khiển bằng áp suất:",
+      "cac_lua_chon": ["A: Reverse Osmosis (RO)", "B: Nanofiltration (NF)", "C: Ultrafiltration (UF)", "D: Microfiltration (MF)"],
+      "dap_an": "A: Reverse Osmosis (RO)"
+    },
+    {
+      "id": 2,
+      "loai": "single_choice",
+      "cau_hoi": "Màng RO có khả năng loại bỏ (rejection) NaCl đạt tối thiểu:",
+      "cac_lua_chon": ["A: >= 95%", "B: >= 50%", "C: >= 80%", "D: 100%"],
+      "dap_an": "A: >= 95%"
+    },
+    {
+      "id": 3,
+      "loai": "single_choice",
+      "cau_hoi": "Mô-đun màng nào sau đây có mật độ đóng gói (packing density) cao nhất:",
+      "cac_lua_chon": ["A: Hollow fiber module", "B: Spiral-wound module", "C: Plate-and-frame module", "D: Tubular module"],
+      "dap_an": "A: Hollow fiber module"
+    },
+    {
+      "id": 4,
+      "loai": "single_choice",
+      "cau_hoi": "Mô-đun màng nào thích hợp nhất khi xử lý dòng nhập liệu có hàm lượng chất rắn lơ lửng rất cao và độ nhớt lớn:",
+      "cac_lua_chon": ["A: Tubular module (dạng ống ceramic)", "B: Hollow fiber", "C: Spiral-wound", "D: Flat-sheet cassette"],
+      "dap_an": "A: Tubular module (dạng ống ceramic)"
+    },
+    {
+      "id": 5,
+      "loai": "single_choice",
+      "cau_hoi": "Trong lọc màng, dòng dịch thấm qua màng được gọi là:",
+      "cac_lua_chon": ["A: Permeate", "B: Retentate", "C: Concentrate", "D: Feed"],
+      "dap_an": "A: Permeate"
+    },
+    {
+      "id": 6,
+      "loai": "single_choice",
+      "cau_hoi": "Dòng giữ lại không qua màng chứa các phân tử kích thước lớn được gọi là:",
+      "cac_lua_chon": ["A: Retentate", "B: Permeate", "C: Filtrate", "D: Solvent"],
+      "dap_an": "A: Retentate"
+    },
+    {
+      "id": 7,
+      "loai": "single_choice",
+      "cau_hoi": "Hệ số nồng độ thể tích VCR (Volume Concentration Ratio) được tính theo công thức:",
+      "cac_lua_chon": ["A: VF,i / VR,t", "B: VR,t / VF,i", "C: VP,t / VF,i", "D: VF,i / VP,t"],
+      "dap_an": "A: VF,i / VR,t"
+    },
+    {
+      "id": 8,
+      "loai": "single_choice",
+      "cau_hoi": "Áp suất xuyên màng TMP (Transmembrane Pressure) được xác định bằng biểu thức:",
+      "cac_lua_chon": ["A: (PF + PR)/2 - PP", "B: PF - PR", "C: PF - PP", "D: (PF - PR)/2 + PP"],
+      "dap_an": "A: (PF + PR)/2 - PP"
+    },
+    {
+      "id": 9,
+      "loai": "single_choice",
+      "cau_hoi": "Màng Nanofiltration (NF) thường được ứng dụng để tách thành phần nào ra khỏi whey phô mai:",
+      "cac_lua_chon": ["A: Các ion đơn hóa trị (Na+, Cl-) để khử muối một phần", "B: Micelle casein", "C: Cầu béo", "D: Nước tinh khiết"],
+      "dap_an": "A: Các ion đơn hóa trị (Na+, Cl-) để khử muối một phần"
+    },
+    {
+      "id": 10,
+      "loai": "single_choice",
+      "cau_hoi": "Lọc tiếp tuyến (Crossflow filtration) có ưu điểm nổi bật so với lọc cụt (Dead-end filtration) là:",
+      "cac_lua_chon": ["A: Giảm phân cực nồng độ và hạn chế tắc nghẽn bề mặt màng", "B: Áp suất yêu cầu luôn bằng 0", "C: Không cần bơm tuần hoàn", "D: Tiêu tốn ít diện tích màng hơn 100 lần"],
+      "dap_an": "A: Giảm phân cực nồng độ và hạn chế tắc nghẽn bề mặt màng"
+    },
+    {
+      "id": 11,
+      "loai": "single_choice",
+      "cau_hoi": "Kích thước đường kính trung bình của micelle casein trong sữa dao động trong khoảng:",
+      "cac_lua_chon": ["A: 25 - 130 nm", "B: 2 - 10 µm", "C: 0.3 - 0.5 nm", "D: 500 - 1000 nm"],
+      "dap_an": "A: 25 - 130 nm"
+    },
+    {
+      "id": 12,
+      "loai": "single_choice",
+      "cau_hoi": "Kích thước của các giọt cầu béo trong sữa thường nằm trong khoảng:",
+      "cac_lua_chon": ["A: 2 - 10 µm (2000 - 10000 nm)", "B: 10 - 20 nm", "C: 0.1 - 0.2 nm", "D: 50 - 80 nm"],
+      "dap_an": "A: 2 - 10 µm (2000 - 10000 nm)"
+    },
+    {
+      "id": 13,
+      "loai": "single_choice",
+      "cau_hoi": "Nồng độ protein trong sản phẩm Whey Protein Isolate (WPI) đạt tối thiểu:",
+      "cac_lua_chon": ["A: > 90% chất khô", "B: 35% chất khô", "C: 50% chất khô", "D: 10% chất khô"],
+      "dap_an": "A: > 90% chất khô"
+    },
+    {
+      "id": 14,
+      "loai": "single_choice",
+      "cau_hoi": "Quá trình Bactocatch sử dụng màng vi lọc (MF) để xử lý sữa sản xuất phô mai nhằm loại trừ:",
+      "cac_lua_chon": ["A: Bào tử vi khuẩn Clostridium tyrobutyricum", "B: Toàn bộ chất béo", "C: Muối canxi", "D: Đường lactose"],
+      "dap_an": "A: Bào tử vi khuẩn Clostridium tyrobutyricum"
+    },
+    {
+      "id": 15,
+      "loai": "single_choice",
+      "cau_hoi": "Phương pháp diafiltration (lọc thẩm tách) bổ sung nước vào dòng retentate nhằm mục đích:",
+      "cac_lua_chon": ["A: Rửa trôi tối đa các phân tử nhỏ (lactose, muối) để nâng cao độ tinh sạch của protein", "B: Tăng nhanh độ nhớt", "C: Làm đông tụ protein", "D: Giảm áp suất thẩm thấu về 0"],
+      "dap_an": "A: Rửa trôi tối đa các phân tử nhỏ (lactose, muối) để nâng cao độ tinh sạch của protein"
+    },
+    {
+      "id": 16,
+      "loai": "true_false",
+      "cau_hoi": "Màng RO cho phép cả muối khoáng và phân tử đường lactose tự do đi qua màng dễ dàng",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 17,
+      "loai": "true_false",
+      "cau_hoi": "Trong hệ thống lọc màng xoắn ốc (Spiral-wound), chất lỏng có độ nhớt quá cao rất dễ gây nghẽn rãnh lưới đệm (spacer)",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 18,
+      "loai": "true_false",
+      "cau_hoi": "Kỹ thuật rửa ngược (backflushing) có thể thực hiện hiệu quả trên màng gốm (ceramic) nhưng hạn chế ở màng xoắn ốc",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 19,
+      "loai": "true_false",
+      "cau_hoi": "Nhiệt độ lọc màng tăng giúp giảm độ nhớt chất lỏng và tăng tốc độ thấm permeate flux",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 20,
+      "loai": "true_false",
+      "cau_hoi": "Màng lọc Nano (NF) thường mang điện tích âm trên bề mặt nên có khả năng cản các anion hóa trị cao tốt hơn anion đơn hóa trị",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 21,
+      "loai": "single_choice",
+      "cau_hoi": "Khoảng nhiệt độ nguy cơ cần tránh để giảm vi sinh vật phát triển:",
+      "cac_lua_chon": ["-20 đến 0 độ C", "0 độ C đến 7 độ C", "7 độ C đến 63 độ C", "63 độ C đến 100 độ C"],
+      "dap_an": "7 độ C đến 63 độ C"
+    },
+    {
+      "id": 22,
+      "loai": "single_choice",
+      "cau_hoi": "Khi làm lạnh rau quả tươi, cần lấy ra tải nhiệt nào:",
+      "cac_lua_chon": ["A: nhiệt cảm biến hạ nhiệt độ", "B: nhiệt hô hấp", "C: ẩn nhiệt kết tinh nước đá", "D: A và B đúng"],
+      "dap_an": "D: A và B đúng"
+    },
+    {
+      "id": 23,
+      "loai": "single_choice",
+      "cau_hoi": "Chế biến đóng gói vô trùng có thể áp dụng cho:",
+      "cac_lua_chon": ["Tất cả các loại sản phẩm", "Chỉ cho sản phẩm bột khô", "Chỉ cho sản phẩm lỏng", "Chỉ cho sản phẩm thịt cá"],
+      "dap_an": "Chỉ cho sản phẩm lỏng"
+    },
+    {
+      "id": 24,
+      "loai": "single_choice",
+      "cau_hoi": "Vị trí đặt đầu dò nhiệt độ tính giá trị F trong đồ hộp truyền nhiệt dẫn nhiệt:",
+      "cac_lua_chon": ["Tiếp xúc thành lon", "Tiếp xúc đáy lon", "Tại điểm gia nhiệt chậm nhất (tâm hình học)", "Trong headspace"],
+      "dap_an": "Tại điểm gia nhiệt chậm nhất (tâm hình học)"
+    },
+    {
+      "id": 25,
+      "loai": "single_choice",
+      "cau_hoi": "Nhiệt độ tham khảo chuẩn để tiệt trùng đồ hộp:",
+      "cac_lua_chon": ["70 độ C", "100 độ C", "121 độ C", "131 độ C"],
+      "dap_an": "121 độ C"
+    },
+    {
+      "id": 26,
+      "loai": "single_choice",
+      "cau_hoi": "Mối tương quan phụ thuộc nhiệt độ của D và z:",
+      "cac_lua_chon": ["A: D phụ thuộc, z không phụ thuộc", "B: D không phụ thuộc, z phụ thuộc", "C: cả hai không phụ thuộc", "D: cả hai phụ thuộc"],
+      "dap_an": "A: D phụ thuộc, z không phụ thuộc"
+    },
+    {
+      "id": 27,
+      "loai": "single_choice",
+      "cau_hoi": "Khi xử lý nhiệt 3D, số lượng vi sinh vật giảm:",
+      "cac_lua_chon": ["3 lần", "3000 lần", "1000 lần", "không câu nào đúng"],
+      "dap_an": "1000 lần"
+    },
+    {
+      "id": 28,
+      "loai": "single_choice",
+      "cau_hoi": "Hạn sử dụng của rau củ quả bảo quản lạnh phụ thuộc vào:",
+      "cac_lua_chon": ["Loại nguyên liệu", "Bộ phận nguyên liệu", "Điều kiện thu hoạch và nhiệt độ", "Tất cả các yếu tố trên"],
+      "dap_an": "Tất cả các yếu tố trên"
+    },
+    {
+      "id": 29,
+      "loai": "single_choice",
+      "cau_hoi": "Áp suất đo bằng áp kế (gauge pressure) là:",
+      "cac_lua_chon": ["Áp suất dư", "Áp suất tuyệt đối", "Áp suất chân không tuyệt đối", "Tất cả đều đúng"],
+      "dap_an": "Áp suất dư"
+    },
+    {
+      "id": 30,
+      "loai": "single_choice",
+      "cau_hoi": "Khoảng nhiệt độ xử lý tiệt trùng UHT thường áp dụng:",
+      "cac_lua_chon": ["A: 45-62°C", "B: 63-95°C", "C: 109-121°C", "D: 130-150°C"],
+      "dap_an": "D: 130-150°C"
+    },
+    {
+      "id": 31,
+      "loai": "single_choice",
+      "cau_hoi": "Hằng số kháng nhiệt z là khoảng nhiệt độ tăng lên để giá trị D giảm:",
+      "cac_lua_chon": ["1 phút", "10 phút", "10 lần", "1 lần"],
+      "dap_an": "10 lần"
+    },
+    {
+      "id": 32,
+      "loai": "single_choice",
+      "cau_hoi": "Quy đổi 30 độ C sang độ K:",
+      "cac_lua_chon": ["103,15", "203,15", "303,15", "403,15"],
+      "dap_an": "303,15"
+    },
+    {
+      "id": 33,
+      "loai": "single_choice",
+      "cau_hoi": "Tên tiếng Anh chuẩn của Trường ĐH Nông Lâm Tp. HCM:",
+      "cac_lua_chon": ["Nong Lam University - Ho Chi Minh City", "Agriculture & Forestry University", "Thu Duc University", "University of Technology"],
+      "dap_an": "Nong Lam University - Ho Chi Minh City"
+    },
+    {
+      "id": 34,
+      "loai": "single_choice",
+      "cau_hoi": "Chất nào sau đây có thể dùng làm môi chất lạnh trong hệ thống lạnh hấp thụ/cơ học:",
+      "cac_lua_chon": ["Ethanol", "Methanol", "Nước", "Không câu nào đúng"],
+      "dap_an": "Nước"
+    },
+    {
+      "id": 35,
+      "loai": "single_choice",
+      "cau_hoi": "Thuật ngữ 'Retort' dùng để chỉ thiết bị nào:",
+      "cac_lua_chon": ["A: Thiết bị tiệt trùng thực phẩm sau đóng lon", "B: Thiết bị tiệt trùng trước khi rót", "C: Thiết bị UHT", "D: Máy ly tâm"],
+      "dap_an": "A: Thiết bị tiệt trùng thực phẩm sau đóng lon"
+    },
+    {
+      "id": 36,
+      "loai": "true_false",
+      "cau_hoi": "Độ ẩm môi trường càng thấp thì thực phẩm không bao gói mất ẩm càng nhanh",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 37,
+      "loai": "true_false",
+      "cau_hoi": "Thời gian bảo quản lạnh của rau xà lách dài hơn cà rốt",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 38,
+      "loai": "true_false",
+      "cau_hoi": "Mục đích số một của chần rau quả là tiêu diệt toàn bộ vi sinh vật nha bào",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 39,
+      "loai": "true_false",
+      "cau_hoi": "Thanh trùng luôn tiến hành ở nhiệt độ thấp hơn tiệt trùng",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 40,
+      "loai": "true_false",
+      "cau_hoi": "Đông lạnh chỉ áp dụng cho thành phẩm, không áp dụng cho nguyên liệu thô",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 41,
+      "loai": "true_false",
+      "cau_hoi": "Thực phẩm ít acid sau thanh trùng bắt buộc phải giữ ở điều kiện bảo quản lạnh",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 42,
+      "loai": "true_false",
+      "cau_hoi": "Áp suất tuyệt đối trong mọi trường hợp luôn lớn hơn áp suất khí quyển",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 43,
+      "loai": "true_false",
+      "cau_hoi": "Khi nhiệt độ tiệt trùng nâng cao thì thời gian giữ nhiệt cũng phải tăng lên tương ứng",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 44,
+      "loai": "true_false",
+      "cau_hoi": "Thiết bị tiệt trùng có đảo trộn giúp bảo toàn dinh dưỡng tốt hơn thiết bị tĩnh",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 45,
+      "loai": "true_false",
+      "cau_hoi": "Độ ẩm phòng cấp đông càng thấp thì hiện tượng thăng hoa đá gây hao hụt khối lượng càng cao",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 46,
+      "loai": "true_false",
+      "cau_hoi": "Quá trình thanh trùng HTST tấm bản là quy trình thanh trùng liên tục",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 47,
+      "loai": "multiple_select",
+      "cau_hoi": "Các quá trình gây giảm hoạt độ nước của thực phẩm:",
+      "cac_lua_chon": ["Gia nhiệt trong nồi kín", "Sấy thực phẩm", "Bốc hơi cô đặc", "Bổ sung muối ăn"],
+      "dap_an": ["Sấy thực phẩm", "Bốc hơi cô đặc", "Bổ sung muối ăn"]
+    },
+    {
+      "id": 48,
+      "loai": "multiple_select",
+      "cau_hoi": "Các quá trình nhiệt thực hiện ở nhiệt độ > 100°C:",
+      "cac_lua_chon": ["LTLT", "HTST", "Tiệt trùng thường", "UHT", "Làm lạnh", "Lạnh đông"],
+      "dap_an": ["Tiệt trùng thường", "UHT"]
+    },
+    {
+      "id": 49,
+      "loai": "multiple_select",
+      "cau_hoi": "Trái cây thuộc nhóm không có đỉnh hô hấp (non-climacteric):",
+      "cac_lua_chon": ["Nho", "Xoài", "Thơm (Dứa)", "Chuối"],
+      "dap_an": ["Nho", "Thơm (Dứa)"]
+    },
+    {
+      "id": 50,
+      "loai": "multiple_select",
+      "cau_hoi": "Các thông số có đơn vị đo là thời gian trong kỹ thuật tiệt trùng:",
+      "cac_lua_chon": ["Giá trị D", "Giá trị z", "Giá trị F", "Giá trị L"],
+      "dap_an": ["Giá trị D", "Giá trị F"]
+    },
+    {
+      "id": 51,
+      "loai": "multiple_select",
+      "cau_hoi": "Các chu trình nhiệt động của môi chất trong máy lạnh cơ học gồm:",
+      "cac_lua_chon": ["Nén hơi", "Lạnh đông", "Ngưng tụ", "Tiết lưu / Giãn nở", "Cô đặc", "Thăng hoa", "Bốc hơi thu nhiệt"],
+      "dap_an": ["Nén hơi", "Ngưng tụ", "Tiết lưu / Giãn nở", "Bốc hơi thu nhiệt"]
+    },
+    {
+      "id": 52,
+      "loai": "single_choice",
+      "cau_hoi": "Chỉ số pH tới hạn phân chia nhóm thực phẩm có độ acid cao và acid thấp là:",
+      "cac_lua_chon": ["pH = 4.6", "pH = 5.5", "pH = 6.0", "pH = 3.7"],
+      "dap_an": "pH = 4.6"
+    }
+  ]
+}

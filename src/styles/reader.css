@@ -1,0 +1,1146 @@
+/* Màn đọc. Colour và bán kính lấy từ tokens.css; ở đây chỉ thêm lớp riêng của việc đọc:
+   bảng màu theo chủ đề đọc, kiểu chữ dài, hai thanh chrome, rail, và bảng tự cuộn ngang. */
+
+.reader {
+  --r-bg: #fcfbf8;
+  --r-fg: #1c2333;
+  --r-dim: color-mix(in oklab, var(--r-fg) 64%, var(--r-bg));
+  --r-hair: color-mix(in oklab, var(--r-fg) 15%, transparent);
+  --r-accent: var(--cinnabar);
+  --r-on-accent: var(--on-cinnabar);
+  --read-size: 18px;
+  --rtop-h: calc(48px + env(safe-area-inset-top));
+  --rbot-h: calc(56px + env(safe-area-inset-bottom));
+
+  min-height: 100dvh;
+  min-inline-size: 0;
+  background: var(--r-bg);
+  color: var(--r-fg);
+  font-family: var(--font-reading, var(--font-ui));
+  font-size: var(--read-size);
+  line-height: var(--read-line, 1.65);
+  /* Màn đọc không cần thanh cuộn ngang nào của trang. */
+  overflow-x: clip;
+}
+
+@media (min-width: 1024px) {
+  .reader {
+    --read-size: 19px;
+    --rtop-h: 52px;
+  }
+}
+
+.reader[data-theme='paper'] {
+  --r-bg: #f3eadb;
+  --r-fg: #2f281c;
+}
+
+.reader[data-theme='dark'] {
+  --r-bg: #262c3a;
+  --r-fg: #dcd8cf;
+  --r-accent: #e2704a;
+  --r-on-accent: #23130c;
+}
+
+.reader[data-theme='light'] {
+  color-scheme: light;
+}
+
+.reader[data-theme='dark'] {
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  .reader[data-theme='auto'] {
+    --r-bg: #262c3a;
+    --r-fg: #dcd8cf;
+    --r-accent: #e2704a;
+    --r-on-accent: #23130c;
+  }
+}
+
+.reader__body {
+  display: grid;
+  gap: 0;
+  /* minmax(0,1fr): nếu dùng auto, chiều dài tối thiểu của một bảng 5 cột sẽ ép cả cột
+     chữ rộng hơn màn hình và làm cả trang ngang. */
+  grid-template-columns: minmax(0, 1fr);
+  min-height: calc(100dvh - var(--rtop-h));
+  padding-top: var(--rtop-h);
+}
+
+@media (min-width: 1024px) {
+  .reader__body {
+    grid-template-columns: minmax(0, 252px) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .reader[data-rail='on'] .reader__body {
+    grid-template-columns: minmax(0, 252px) minmax(0, 1fr) minmax(0, 268px);
+  }
+}
+
+/* ---------- cột chữ ---------- */
+
+.reader__text {
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin-inline: auto;
+  padding: var(--sp-4) 20px calc(var(--rbot-h) + var(--sp-7));
+  max-inline-size: min(100%, calc(var(--read-measure, 66ch) + 40px));
+}
+
+@media (min-width: 640px) {
+  .reader__text {
+    padding-inline: var(--sp-6);
+  }
+}
+
+.reader .b {
+  max-inline-size: var(--read-measure, 66ch);
+  margin-inline: 0;
+}
+
+.reader .b--p {
+  margin-block-end: 0.85em;
+  text-wrap: pretty;
+}
+
+.reader[data-align='justify'] .b--p,
+.reader[data-align='justify'] .b--quote,
+.reader[data-align='justify'] .b-li {
+  text-align: justify;
+  hyphens: none;
+}
+
+.reader .b--intro {
+  font-size: 0.9em;
+  color: var(--r-dim);
+}
+
+.reader .b--h {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  text-wrap: balance;
+  margin-block: 1.9em 0.6em;
+  scroll-margin-top: calc(var(--rtop-h) + var(--sp-3));
+}
+
+.reader .b--h2 {
+  font-size: 1.22em;
+  line-height: 1.3;
+}
+
+.reader .b--h3 {
+  font-size: 1.06em;
+  line-height: 1.35;
+  color: color-mix(in oklab, var(--r-fg) 88%, var(--r-bg));
+}
+
+.reader .b--h4 {
+  font-size: 1em;
+}
+
+.reader .b--hr {
+  border: 0;
+  border-top: 1px solid var(--r-hair);
+  margin-block: var(--sp-5);
+  inline-size: 100%;
+  max-inline-size: var(--read-measure, 66ch);
+}
+
+.reader .b--quote {
+  border-inline-start: 3px solid var(--r-hair);
+  padding-inline-start: var(--sp-4);
+  margin-block-end: 1.1em;
+  color: var(--r-dim);
+  font-size: 0.92em;
+}
+
+.reader .b-list {
+  padding-inline-start: 1.5em;
+  margin-block-end: 0.9em;
+  list-style: disc;
+}
+
+.reader ol.b-list {
+  list-style: decimal;
+}
+
+.reader .b-list--sub {
+  margin-block: 0.3em 0.1em;
+  font-size: 0.96em;
+}
+
+.reader .b-li {
+  margin-block-end: 0.42em;
+  text-wrap: pretty;
+}
+
+.reader .b-link,
+.reader .r-link {
+  color: var(--r-accent);
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1px;
+  overflow-wrap: anywhere;
+}
+
+.reader strong {
+  font-weight: 700;
+}
+
+.reader .b-bi {
+  font-style: italic;
+}
+
+.reader code {
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', monospace;
+  font-size: 0.88em;
+  background: color-mix(in oklab, var(--r-fg) 7%, transparent);
+  border-radius: var(--r-cell);
+  padding: 0.1em 0.35em;
+}
+
+/* Bảng: tự cuộn ngang trong phạm vi bảng, không làm cả trang cuộn. */
+.b-scroll {
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  max-inline-size: 100%;
+  margin-block-end: 1.1em;
+  padding-block-end: var(--sp-1);
+}
+
+.b-table {
+  border-collapse: collapse;
+  inline-size: 100%;
+  min-inline-size: max-content;
+  font-size: 0.88em;
+  line-height: 1.45;
+}
+
+.b-table th,
+.b-table td {
+  padding: 0.4em 0.75em;
+  text-align: start;
+  vertical-align: top;
+  border-bottom: 1px solid var(--r-hair);
+  white-space: normal;
+  max-inline-size: 34ch;
+}
+
+.b-table thead th {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  color: var(--r-dim);
+  border-bottom-color: color-mix(in oklab, var(--r-fg) 30%, transparent);
+}
+
+.b-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+/* Tô sáng và kết quả tìm: cùng cơ chế <mark>, khác màu. */
+.b-hl {
+  color: inherit;
+  border-radius: var(--r-cell);
+  padding: 0.02em 0.06em;
+  box-decoration-break: clone;
+  background: color-mix(in oklab, var(--hl, var(--turmeric)) 34%, transparent);
+}
+
+.b-hl--amber {
+  --hl: #e0a71b;
+}
+
+.b-hl--mint {
+  --hl: #4fa06a;
+}
+
+.b-hl--sky {
+  --hl: #4b83b8;
+}
+
+.b-hl--rose {
+  --hl: #c9608c;
+}
+
+.b-hl[title] {
+  text-decoration: underline dotted 1px;
+  text-decoration-color: color-mix(in oklab, var(--hl, var(--turmeric)) 70%, transparent);
+  text-underline-offset: 0.22em;
+}
+
+.b-hit {
+  color: inherit;
+  background: color-mix(in oklab, var(--r-accent) 30%, transparent);
+  border-radius: var(--r-cell);
+}
+
+/* ---------- chrome ---------- */
+
+.rb {
+  position: fixed;
+  inset-inline: 0;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  background: var(--r-bg);
+  color: var(--r-fg);
+  transition: transform var(--dur-2) var(--ease), opacity var(--dur-2) var(--ease);
+}
+
+.rb[data-hidden='true'] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.rtop {
+  top: 0;
+  min-block-size: var(--rtop-h);
+  padding: env(safe-area-inset-top) var(--sp-3) 0;
+  border-bottom: 1px solid var(--r-hair);
+}
+
+.rtop[data-hidden='true'] {
+  transform: translateY(-100%);
+}
+
+.rtop[data-dim='true'] {
+  opacity: 0.35;
+}
+
+.rbottom {
+  bottom: 0;
+  min-block-size: var(--rbot-h);
+  padding: 0 var(--sp-3) env(safe-area-inset-bottom);
+  border-top: 1px solid var(--r-hair);
+}
+
+.rbottom[data-hidden='true'] {
+  transform: translateY(100%);
+}
+
+@media (min-width: 1024px) {
+  .rbottom {
+    display: none;
+  }
+}
+
+.rbtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-1);
+  min-inline-size: var(--tap);
+  min-block-size: var(--tap);
+  padding: 0 var(--sp-2);
+  border: 0;
+  border-radius: var(--r-ctl);
+  background: transparent;
+  color: var(--r-fg);
+  font: inherit;
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease), color var(--dur-1) var(--ease);
+}
+
+.rbtn:hover {
+  background: color-mix(in oklab, var(--r-fg) 8%, transparent);
+}
+
+.rbtn[aria-pressed='true'],
+.rbtn[data-on='true'] {
+  color: var(--r-accent);
+  background: color-mix(in oklab, var(--r-accent) 12%, transparent);
+}
+
+.rbtn--aa {
+  font-family: var(--font-ui);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.rtitle {
+  flex: 1;
+  min-inline-size: 0;
+  /* base.css đặt max-width: var(--measure) cho mọi <p> — thụt vào trong là chủ ý,
+     nhưng thanh tiêu đề phải chiếm hết chỗ trống của bar. */
+  max-inline-size: none;
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  font-weight: 500;
+  color: var(--r-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: clip;
+}
+
+.rsense {
+  inline-size: var(--sp-2);
+  flex: none;
+}
+
+/* Thanh kéo tiến độ: kéo theo khối, không theo số trang. */
+.rseek {
+  flex: 1;
+  min-inline-size: 0;
+  appearance: none;
+  block-size: var(--tap);
+  background: transparent;
+  cursor: pointer;
+}
+
+.rseek::-webkit-slider-runnable-track {
+  block-size: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--r-fg) 14%, transparent);
+}
+
+.rseek::-webkit-slider-thumb {
+  appearance: none;
+  block-size: 18px;
+  inline-size: 18px;
+  margin-block-start: -6px;
+  border-radius: 999px;
+  background: var(--r-accent);
+  border: 2px solid var(--r-bg);
+}
+
+.rseek::-moz-range-track {
+  block-size: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--r-fg) 14%, transparent);
+}
+
+.rseek::-moz-range-thumb {
+  block-size: 16px;
+  inline-size: 16px;
+  border: 2px solid var(--r-bg);
+  border-radius: 999px;
+  background: var(--r-accent);
+}
+
+.rread {
+  flex: none;
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  font-variant-numeric: tabular-nums;
+  color: var(--r-dim);
+  white-space: nowrap;
+}
+
+/* ---------- chương ---------- */
+
+.rchap {
+  font-family: var(--font-ui);
+  font-size: var(--fs-title);
+  line-height: var(--lh-title);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  margin-block: var(--sp-2) var(--sp-2);
+}
+
+.rbyline {
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--r-dim);
+  margin-block-end: var(--sp-5);
+}
+
+.rfoot {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-3);
+  align-items: center;
+  margin-block-start: var(--sp-7);
+  padding-block-start: var(--sp-5);
+  border-top: 1px solid var(--r-hair);
+}
+
+.rbtn--cta {
+  background: var(--r-accent);
+  color: var(--r-on-accent);
+  font-weight: 700;
+  padding-inline: var(--sp-4);
+}
+
+/* Rail trái (mục lục) và rail phải (đánh dấu) chỉ có trên PC. */
+.rail {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .rail {
+    display: grid;
+    gap: var(--sp-2);
+    position: sticky;
+    top: calc(var(--rtop-h) + var(--sp-4));
+    max-block-size: calc(100dvh - var(--rtop-h) - var(--sp-6));
+    overflow: auto;
+    overscroll-behavior: contain;
+    padding: var(--sp-4) var(--sp-3) var(--sp-4) var(--sp-5);
+    align-content: start;
+    border-inline-end: 1px solid var(--r-hair);
+    font-family: var(--font-ui);
+  }
+
+  .rail--end {
+    border-inline-end: 0;
+    border-inline-start: 1px solid var(--r-hair);
+    padding: var(--sp-4) var(--sp-5) var(--sp-4) var(--sp-3);
+  }
+}
+
+.rail__title {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  font-weight: 700;
+  color: var(--r-dim);
+  margin-block-end: var(--sp-2);
+}
+
+/* Mục lục — dùng chung cho sheet (mobile) và rail (PC). */
+.toc {
+  display: grid;
+  gap: 1px;
+}
+
+.toc__ch {
+  display: grid;
+  gap: var(--sp-1);
+  margin-block: var(--sp-3) var(--sp-1);
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  font-weight: 700;
+  color: var(--r-dim);
+}
+
+.tocbtn {
+  display: flex;
+  align-items: baseline;
+  gap: var(--sp-2);
+  inline-size: 100%;
+  min-block-size: 40px;
+  padding: var(--sp-2);
+  border: 0;
+  border-radius: var(--r-ctl);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: var(--fs-body);
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+.tocbtn:hover {
+  background: color-mix(in oklab, var(--r-fg) 7%, transparent);
+}
+
+.tocbtn__mark {
+  flex: none;
+  color: var(--r-accent);
+  block-size: 20px;
+  inline-size: 20px;
+  visibility: hidden;
+}
+
+.tocbtn[data-current='true'] .tocbtn__mark {
+  visibility: visible;
+}
+
+.tocbtn[data-current='true'] {
+  font-weight: 700;
+}
+
+.tocbtn--lv2 {
+  padding-inline-start: var(--sp-5);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+}
+
+.tocbtn__text {
+  min-inline-size: 0;
+}
+
+/* ---------- sheets nội dung ---------- */
+
+.prefs {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+.prefs__row {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.prefs__label {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.prefs__val {
+  font-family: var(--font-num);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-1);
+}
+
+.prefs__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+}
+
+.stepper {
+  display: grid;
+  grid-template-columns: var(--tap) 1fr var(--tap);
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.stepper__bar {
+  block-size: 6px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--ink) 12%, var(--surface));
+  overflow: hidden;
+}
+
+.stepper__fill {
+  block-size: 100%;
+  background: var(--cinnabar);
+}
+
+.marks {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.mark {
+  display: grid;
+  gap: var(--sp-1);
+  inline-size: 100%;
+  text-align: start;
+  padding: var(--sp-3);
+  border: 1px solid var(--hair);
+  border-radius: var(--r-card);
+  background: var(--surface);
+  color: var(--text-1);
+  font: inherit;
+  cursor: pointer;
+}
+
+.mark:hover {
+  border-color: var(--hair-strong);
+}
+
+.mark__where {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+}
+
+.mark__text {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}
+
+.mark__note {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+  border-inline-start: 2px solid var(--turmeric);
+  padding-inline-start: var(--sp-2);
+}
+
+.markrow {
+  display: flex;
+  gap: var(--sp-2);
+  align-items: center;
+}
+
+.tones {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+.tone {
+  inline-size: var(--tap);
+  block-size: var(--tap);
+  border: 1px solid var(--hair-strong);
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--tone) 40%, var(--surface));
+  cursor: pointer;
+}
+
+.tone[aria-checked='true'] {
+  outline: 2px solid var(--turmeric);
+  outline-offset: 2px;
+}
+
+.hits {
+  display: grid;
+  gap: var(--sp-1);
+}
+
+.hit {
+  display: grid;
+  gap: 2px;
+  inline-size: 100%;
+  text-align: start;
+  padding: var(--sp-2);
+  border: 0;
+  border-radius: var(--r-ctl);
+  background: transparent;
+  color: var(--text-1);
+  font: inherit;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  cursor: pointer;
+}
+
+.hit:hover {
+  background: color-mix(in oklab, var(--ink) 7%, transparent);
+}
+
+.hit b {
+  color: var(--cinnabar);
+}
+
+.hit__where {
+  color: var(--text-2);
+}
+
+/* Toolbar chọn chữ */
+.selbar {
+  position: fixed;
+  z-index: 45;
+  display: flex;
+  gap: var(--sp-1);
+  padding: var(--sp-1);
+  background: var(--surface);
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r-ctl);
+  box-shadow: var(--shadow-lift);
+  translate: 0 -100%;
+}
+
+.selbar .rbtn {
+  color: var(--text-1);
+  min-block-size: 40px;
+}
+
+.notebox {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.notebox textarea {
+  inline-size: 100%;
+  min-block-size: 88px;
+  padding: var(--sp-3);
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r-ctl);
+  background: var(--surface);
+  color: var(--text-1);
+  font: inherit;
+  resize: vertical;
+}
+
+.offline {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+}
+
+/* ---------- chế độ lật trang ---------- */
+
+.reader[data-mode='paged'] .reader__text {
+  block-size: calc(100dvh - var(--rtop-h) - var(--rbot-h));
+  max-inline-size: 100%;
+  padding-block: var(--sp-4);
+  padding-block-end: var(--sp-4);
+  overflow-y: hidden;
+  overflow-x: auto;
+  scroll-snap-type: none;
+  column-width: var(--page-w, 100%);
+  column-fill: auto;
+  column-gap: var(--sp-7);
+}
+
+@media (min-width: 1024px) {
+  .reader[data-mode='paged'] .reader__text {
+    block-size: calc(100dvh - var(--rtop-h) - var(--rbot-h));
+    padding-block-end: var(--sp-6);
+  }
+}
+
+.reader[data-mode='paged'] .b--h,
+.reader[data-mode='paged'] .b--quote,
+.reader[data-mode='paged'] .b--hr,
+.reader[data-mode='paged'] .b-li {
+  break-inside: avoid;
+}
+
+.reader[data-mode='paged'] .b-scroll {
+  overflow: visible;
+}
+
+.reader .b-table tr,
+.reader .b-table td,
+.reader .b-table th {
+  break-inside: avoid;
+}
+
+.reader .b-table thead {
+  display: table-header-group;
+}
+
+.reader[data-mode='paged'] .rpage {
+  display: inline-flex;
+}
+
+.reader:not([data-mode='paged']) .rpage {
+  display: none;
+}
+
+/* Hai nút trở trang là lối điều hướng chính của chế độ lật trang: giữ thanh dưới ở mọi bề ngang. */
+.reader[data-mode='paged'] .rbottom {
+  display: flex;
+}
+
+/* ---------- tiện ích bố cục màn đọc ---------- */
+
+.desk-only {
+  display: none;
+}
+
+.touch-only {
+  display: inline-flex;
+}
+
+@media (min-width: 1024px) {
+  .desk-only {
+    display: inline-flex;
+  }
+
+  .touch-only {
+    display: none;
+  }
+}
+
+.reader__rail-start {
+  grid-area: rail;
+}
+
+@media (min-width: 1024px) {
+  /* Tắt rail trái bằng phím T mà không phá lưới của cột chữ. */
+  .reader[data-toc='off'] .rail--start {
+    display: none;
+  }
+
+  .reader[data-toc='off'] .reader__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .reader[data-toc='off'][data-rail='on'] .reader__body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 268px);
+  }
+}
+
+.railbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-1);
+  margin-block-end: var(--sp-3);
+}
+
+.railbar .rbtn {
+  flex: 1;
+  min-inline-size: 0;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+}
+
+.railnote {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--r-dim);
+}
+
+.empty {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+  padding: var(--sp-3) 0;
+}
+
+.searchrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.searchrow input {
+  flex: 1;
+  min-inline-size: 0;
+  block-size: var(--tap);
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--hair-strong);
+  border-radius: var(--r-ctl);
+  background: var(--surface);
+  color: var(--text-1);
+  font: inherit;
+}
+
+.searchrow input:focus-visible {
+  outline: 2px solid var(--turmeric);
+  outline-offset: 2px;
+}
+
+.searchmeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+}
+
+.hit__text {
+  color: var(--text-1);
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.prefs__faces {
+  display: grid;
+  gap: var(--sp-1);
+}
+
+.facebtn {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  min-block-size: var(--tap);
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--hair);
+  border-radius: var(--r-ctl);
+  background: var(--surface);
+  color: var(--text-1);
+  font: inherit;
+  cursor: pointer;
+  text-align: start;
+}
+
+.facebtn[data-on='true'] {
+  border-color: var(--cinnabar);
+  background: color-mix(in oklab, var(--cinnabar) 8%, var(--surface));
+}
+
+.facebtn__name {
+  font-size: var(--fs-body);
+  line-height: var(--lh-body);
+}
+
+.facebtn__hint {
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+}
+
+.themecolour {
+  inline-size: 14px;
+  block-size: 14px;
+  border-radius: 999px;
+  border: 1px solid var(--hair-strong);
+  background: var(--swatch);
+  flex: none;
+}
+
+.opts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+}
+
+.optbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  min-block-size: var(--tap);
+  padding: 0 var(--sp-3);
+  border: 1px solid var(--hair);
+  border-radius: var(--r-ctl);
+  background: var(--surface);
+  color: var(--text-1);
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  cursor: pointer;
+  transition: border-color var(--dur-1) var(--ease), background-color var(--dur-1) var(--ease),
+    color var(--dur-1) var(--ease);
+}
+
+.optbtn:hover {
+  border-color: var(--hair-strong);
+}
+
+.optbtn[aria-pressed='true'] {
+  border-color: var(--cinnabar);
+  color: var(--cinnabar);
+  background: color-mix(in oklab, var(--cinnabar) 8%, var(--surface));
+}
+
+.tocbtn--ch {
+  font-family: var(--font-ui);
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  font-weight: 700;
+}
+
+.markrow .mark {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+.mark__where {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.themecolour {
+  display: inline-block;
+  vertical-align: -2px;
+}
+
+.stepper__fill {
+  display: block;
+}
+
+.hit__where {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+/* ---------- khối "Tài liệu đọc" trên trang chủ ---------- */
+
+.reading {
+  display: grid;
+  gap: var(--sp-3);
+  padding: var(--sp-5);
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: var(--r-card);
+}
+
+.reading__head {
+  display: grid;
+  gap: var(--sp-1);
+}
+
+.reading__head h2 {
+  font-size: var(--fs-title);
+  line-height: var(--lh-title);
+}
+
+.reading__go {
+  justify-self: start;
+}
+
+.readlist {
+  display: grid;
+}
+
+.readrow {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  min-block-size: var(--tap);
+  padding: var(--sp-2) var(--sp-1);
+  border: 0;
+  border-top: 1px solid var(--hair);
+  background: transparent;
+  color: var(--text-1);
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  transition: background-color var(--dur-1) var(--ease);
+}
+
+.readrow:hover {
+  background: color-mix(in oklab, var(--ink) 6%, transparent);
+}
+
+.readrow__title {
+  flex: 1;
+  min-inline-size: 0;
+  font-weight: 500;
+}
+
+.readrow__meter {
+  inline-size: 88px;
+  block-size: 6px;
+  flex: none;
+  display: block;
+  border-radius: 999px;
+  overflow: hidden;
+  background: color-mix(in oklab, var(--ink) 12%, var(--surface));
+}
+
+.readrow__meter .meter__fill {
+  display: block;
+}
+
+.readrow__pct {
+  inline-size: 48px;
+  flex: none;
+  text-align: end;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+}
+
+.reading__off {
+  display: flex;
+  margin-block-start: var(--sp-3);
+}
+
+@media (max-width: 639px) {
+  .reading {
+    padding: var(--sp-4);
+  }
+
+  .readrow__title {
+    font-size: var(--fs-meta);
+    line-height: var(--lh-meta);
+  }
+
+  .readrow__meter {
+    inline-size: 52px;
+  }
+}

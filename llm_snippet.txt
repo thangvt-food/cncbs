@@ -1,0 +1,40 @@
+# Gemini, and OpenAI.
+# Used by `graphify extract . --backend gemini` and the benchmark scripts.
+# The default graphify pipeline uses Claude Code subagents via skill.md;
+# this module provides a direct API path for non-Claude-Code environments.
+from __future__ import annotations
+
+import base64
+import hashlib
+import json
+import os
+import re
+import subprocess
+import sys
+import time
+from collections.abc import Callable, Iterator
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from dataclasses import dataclass, replace
+from pathlib import Path
+
+from graphify.extractors.base import _read_source_text
+from graphify.file_slice import (
+    FileSlice,
+    bisect_slice,
+    expand_oversized_files,
+    read_slice_text,
+    unit_path,
+)
+
+# `_read_files` truncates each file at this many characters before joining into
+# the user message. Token estimates use the same cap so packing matches reality.
+_FILE_CHAR_CAP = 20_000
+# Warn at most once per run when a file exceeds _FILE_CHAR_CAP, so corpora with
+# multiple oversized files do not spam stderr (#3773).
+_file_truncation_warned = False
+# `_read_files` wraps each file in an `<untrusted_source path=... sha256=...>`
+# delimiter block (see issue #1210); this is roughly the per-file overhead in
+# characters that wrapper adds (open tag + 64-char sha + close tag + newlines).
+_PER_FILE_OVERHEAD_CHARS = 160
+# Coarse fallback used only when `tiktoken` is not installed. 1 token ≈ 4 chars
+# is the standard heuristic for English/code on

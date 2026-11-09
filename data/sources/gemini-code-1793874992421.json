@@ -1,0 +1,333 @@
+{
+  "ten_de": "Bộ 48 câu hỏi Nguyên lý Kỹ thuật Chế biến Thực phẩm (Bản hoàn chỉnh kèm ma trận)",
+  "tong_so_cau_va_diem": 48,
+  "cau_hoi": [
+    {
+      "id": 1,
+      "loai": "single_choice",
+      "cau_hoi": "Khoảng nhiệt độ nguy cơ cần tránh để giảm sự phát triển của vi sinh vật là:",
+      "cac_lua_chon": ["-20 đến 0 độ C", "0 độ C đến 7 độ C", "7 độ C đến 63 độ C", "63 độ C đến 100 độ C"],
+      "dap_an": "7 độ C đến 63 độ C"
+    },
+    {
+      "id": 2,
+      "loai": "single_choice",
+      "cau_hoi": "Khi làm lạnh rau quả tươi, cần lấy ra:",
+      "cac_lua_chon": ["A: nhiệt cảm biến hạ nhiệt độ của thực phẩm", "B: nhiệt tạo ra do hô hấp", "C: ẩn nhiệt kết tinh nước thành đá", "D: A và B đúng"],
+      "dap_an": "D: A và B đúng"
+    },
+    {
+      "id": 3,
+      "loai": "single_choice",
+      "cau_hoi": "Chế biến đóng gói vô trùng có thể áp dụng cho:",
+      "cac_lua_chon": ["Tất cả các loại sản phẩm", "Chỉ cho sản phẩm bột khô", "Chỉ cho sản phẩm lỏng", "Chỉ cho sản phẩm thịt cá"],
+      "dap_an": "Chỉ cho sản phẩm lỏng"
+    },
+    {
+      "id": 4,
+      "loai": "single_choice",
+      "cau_hoi": "Trong tiệt trùng đồ hộp, đầu đo nhiệt độ dùng để lấy dữ liệu tính giá trị F được đặt ở:",
+      "cac_lua_chon": ["Bên trong, chỗ tiếp xúc với thành lon", "Bên trong, chỗ tiếp xúc với đáy lon", "Tại điểm gia nhiệt chậm nhất trong lon", "Trong headspace"],
+      "dap_an": "Tại điểm gia nhiệt chậm nhất trong lon"
+    },
+    {
+      "id": 5,
+      "loai": "single_choice",
+      "cau_hoi": "Nhiệt độ tham khảo để tiệt trùng đồ hộp là:",
+      "cac_lua_chon": ["70 độ C", "100 độ C", "121 độ C", "131 độ C"],
+      "dap_an": "121 độ C"
+    },
+    {
+      "id": 6,
+      "loai": "single_choice",
+      "cau_hoi": "Tính phụ thuộc vào nhiệt độ xử lý:",
+      "cac_lua_chon": ["A: D phụ thuộc, z không phụ thuộc", "B: D không phụ thuộc, z phụ thuộc", "C: cả D và z không phụ thuộc", "D: cả D và z đều phụ thuộc"],
+      "dap_an": "A: D phụ thuộc, z không phụ thuộc"
+    },
+    {
+      "id": 7,
+      "loai": "single_choice",
+      "cau_hoi": "Khi thực hiện quá trình xử lý nhiệt 3D, số lượng vi sinh vật giảm:",
+      "cac_lua_chon": ["3 lần", "3000 lần", "1000 lần", "không câu nào đúng"],
+      "dap_an": "1000 lần"
+    },
+    {
+      "id": 8,
+      "loai": "single_choice",
+      "cau_hoi": "Hạn sử dụng của nguyên liệu thực vật bảo quản lạnh phụ thuộc vào:",
+      "cac_lua_chon": ["Loại nguyên liệu", "Bộ phận của nguyên liệu", "điều kiện tại thời điểm thu hoạch và nhiệt độ bảo quản", "tất cả các yếu tố trên"],
+      "dap_an": "tất cả các yếu tố trên"
+    },
+    {
+      "id": 9,
+      "loai": "single_choice",
+      "cau_hoi": "Khi đo áp suất nồi tiệt trùng bằng đồng hồ đo (gauge pressure), thì giá trị đọc được là:",
+      "cac_lua_chon": ["áp suất dư", "áp suất tuyệt đối", "áp suất zero tuyệt đối", "tất cả đều đúng"],
+      "dap_an": "áp suất dư"
+    },
+    {
+      "id": 10,
+      "loai": "single_choice",
+      "cau_hoi": "UHT thường được thực hiện trong khoảng nhiệt độ:",
+      "cac_lua_chon": ["A: 45-62°C", "B: 63-95°C", "C: 109-121°C", "D: 130-150°C"],
+      "dap_an": "D: 130-150°C"
+    },
+    {
+      "id": 11,
+      "loai": "single_choice",
+      "cau_hoi": "Hằng số kháng nhiệt z là khoảng nhiệt độ xử lý tăng lên để giảm D:",
+      "cac_lua_chon": ["1 phút", "10 phút", "10 lần", "1 lần"],
+      "dap_an": "10 lần"
+    },
+    {
+      "id": 12,
+      "loai": "single_choice",
+      "cau_hoi": "Nhiệt độ 30 độ C đổi thành độ K sẽ là:",
+      "cac_lua_chon": ["103,15", "203,15", "303,15", "403,15"],
+      "dap_an": "303,15"
+    },
+    {
+      "id": 13,
+      "loai": "single_choice",
+      "cau_hoi": "Tên tiếng Anh hiện tại của Trường ĐH Nông Lâm Tp. HCM:",
+      "cac_lua_chon": ["Nong Lam University - Ho Chi Minh City", "Agriculture & Forestry University - Ho Chi Minh City", "Thu Duc University", "University of Technical Education - Ho Chi Minh City"],
+      "dap_an": "Nong Lam University - Ho Chi Minh City"
+    },
+    {
+      "id": 14,
+      "loai": "single_choice",
+      "cau_hoi": "Môi chất lạnh trong hệ thống lạnh cơ học có thể là:",
+      "cac_lua_chon": ["ethanol", "methanol", "nước", "không câu nào đúng"],
+      "dap_an": "nước"
+    },
+    {
+      "id": 15,
+      "loai": "single_choice",
+      "cau_hoi": "Từ 'retort' gần nghĩa nhất với:",
+      "cac_lua_chon": ["A: thiết bị tiệt trùng thực phẩm sau đóng lon", "B: thiết bị tiệt trùng thực phẩm trước khi đóng lon", "C: thiết bị xử lý UHT", "D: tất cả đều đúng"],
+      "dap_an": "A: thiết bị tiệt trùng thực phẩm sau đóng lon"
+    },
+    {
+      "id": 16,
+      "loai": "true_false",
+      "cau_hoi": "Ẩm tương đối của môi trường chung quanh càng thấp thì mức độ mất ẩm của thực phẩm không bao gói càng cao",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 17,
+      "loai": "true_false",
+      "cau_hoi": "Hạn sử dụng bảo quản lạnh của rau xà lách dài hơn củ cà rốt",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 18,
+      "loai": "true_false",
+      "cau_hoi": "Mục đích chính của quá trình chần là để tiêu diệt vi sinh vật",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 19,
+      "loai": "true_false",
+      "cau_hoi": "Thanh trùng được thực hiện ở nhiệt độ thấp hơn tiệt trùng",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 20,
+      "loai": "true_false",
+      "cau_hoi": "Bảo quản lạnh đông thường chỉ áp dụng cho thành phẩm chế biến chứ không áp dụng cho nguyên liệu",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 21,
+      "loai": "true_false",
+      "cau_hoi": "Sản phẩm có độ acid thấp sau khi thanh trùng cần bảo quản ở điều kiện lạnh",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 22,
+      "loai": "true_false",
+      "cau_hoi": "Áp suất tuyệt đối luôn lớn hơn áp suất khí quyển",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 23,
+      "loai": "true_false",
+      "cau_hoi": "Trong tính toán các quá trình tiệt trùng tương đương, nhiệt độ xử lý cao lên thì thời gian xử lý cũng cần phải tăng lên tương ứng",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Sai"
+    },
+    {
+      "id": 24,
+      "loai": "true_false",
+      "cau_hoi": "Thiết bị tiệt trùng từng mẻ có đảo trộn giữ được giá trị dinh dưỡng thực phẩm tốt hơn thiết bị từng mẻ đứng yên",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 25,
+      "loai": "true_false",
+      "cau_hoi": "Ẩm tương đối không khí trong phòng bảo quản lạnh đông càng nhỏ thì mất mát khối lượng do thăng hoa nước đá từ thực phẩm càng cao",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 26,
+      "loai": "true_false",
+      "cau_hoi": "Thanh trùng HTST là quá trình thanh trùng liên tục",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 27,
+      "loai": "multiple_select",
+      "cau_hoi": "Quá trình nào sau đây gây giảm hoạt độ nước của thực phẩm:",
+      "cac_lua_chon": ["Gia nhiệt trong thiết bị kín", "Sấy thực phẩm", "Bốc hơi cô đặc", "Thêm muối ăn vào thực phẩm"],
+      "dap_an": ["Sấy thực phẩm", "Bốc hơi cô đặc", "Thêm muối ăn vào thực phẩm"]
+    },
+    {
+      "id": 28,
+      "loai": "multiple_select",
+      "cau_hoi": "Quá trình nào sau đây được thực hiện ở nhiệt độ lớn hơn 100 độ C:",
+      "cac_lua_chon": ["Thanh trùng LTLT", "Thanh trùng HTST", "Tiệt trùng thường", "UHT", "Bảo quản lạnh thực phẩm", "Lạnh đông thực phẩm"],
+      "dap_an": ["Tiệt trùng thường", "UHT"]
+    },
+    {
+      "id": 29,
+      "loai": "multiple_select",
+      "cau_hoi": "Trái cây nào sau đây thuộc nhóm không có đỉnh hô hấp (non-climateric):",
+      "cac_lua_chon": ["Nho", "xoài", "thơm", "chuối"],
+      "dap_an": ["Nho", "thơm"]
+    },
+    {
+      "id": 30,
+      "loai": "multiple_select",
+      "cau_hoi": "Trong tiệt trùng, thông số nào có đơn vị là thời gian:",
+      "cac_lua_chon": ["giá trị D", "giá trị Z", "giá trị F", "Giá trị L"],
+      "dap_an": ["giá trị D", "giá trị F"]
+    },
+    {
+      "id": 31,
+      "loai": "multiple_select",
+      "cau_hoi": "Hệ thống lạnh cơ học vận hành theo các quá trình sau xảy ra với chất lạnh:",
+      "cac_lua_chon": ["Nén", "Lạnh đông", "Ngưng tụ", "Giãn nở (giảm áp)", "Cô đặc", "Thăng hoa", "Bốc hơi"],
+      "dap_an": ["Nén", "Ngưng tụ", "Giãn nở (giảm áp)", "Bốc hơi"]
+    },
+    {
+      "id": 32,
+      "loai": "matching_item",
+      "cau_hoi": "Trạng thái của nước ở vùng 1 trên giản đồ pha P-T:",
+      "dap_an": "Nước đá rắn"
+    },
+    {
+      "id": 33,
+      "loai": "matching_item",
+      "cau_hoi": "Trạng thái của nước ở vùng 2 trên giản đồ pha P-T:",
+      "dap_an": "Nước lỏng"
+    },
+    {
+      "id": 34,
+      "loai": "matching_item",
+      "cau_hoi": "Trạng thái của nước ở vùng 3 trên giản đồ pha P-T:",
+      "dap_an": "Hơi nước"
+    },
+    {
+      "id": 35,
+      "loai": "matching_item",
+      "cau_hoi": "Trạng thái cân bằng pha ở đường biên 4 (giữa rắn và lỏng):",
+      "dap_an": "Rắn + lỏng"
+    },
+    {
+      "id": 36,
+      "loai": "matching_item",
+      "cau_hoi": "Trạng thái cân bằng pha ở đường biên 5 (giữa lỏng và hơi):",
+      "dap_an": "Lỏng + hơi"
+    },
+    {
+      "id": 37,
+      "loai": "matching_item",
+      "cau_hoi": "Trạng thái tại điểm ba pha (Triple point) vị trí 6:",
+      "dap_an": "Rắn + lỏng + khí"
+    },
+    {
+      "id": 38,
+      "loai": "matching_item",
+      "cau_hoi": "Ẩn nhiệt ngưng tụ của nước ở áp suất khí quyển (kJ/kg):",
+      "dap_an": "2257.06 kJ/kg"
+    },
+    {
+      "id": 39,
+      "loai": "matching_item",
+      "cau_hoi": "Ẩn nhiệt tan chảy của nước đá ở áp suất khí quyển (kJ/kg):",
+      "dap_an": "333.2 kJ/kg"
+    },
+    {
+      "id": 40,
+      "loai": "matching_item",
+      "cau_hoi": "Ẩn nhiệt bốc hơi của nước ở áp suất khí quyển (kJ/kg):",
+      "dap_an": "2257.06 kJ/kg"
+    },
+    {
+      "id": 41,
+      "loai": "single_choice",
+      "cau_hoi": "Nhiệt dung riêng của nước lỏng ở điều kiện thường xấp xỉ bằng:",
+      "cac_lua_chon": ["4.18 kJ/kg.K", "2.09 kJ/kg.K", "1.00 kJ/kg.K", "2257 kJ/kg.K"],
+      "dap_an": "4.18 kJ/kg.K"
+    },
+    {
+      "id": 42,
+      "loai": "single_choice",
+      "cau_hoi": "Đường cong thăng hoa trên giản đồ pha nước biểu thị sự cân bằng giữa:",
+      "cac_lua_chon": ["Pha rắn và pha hơi", "Pha rắn và pha lỏng", "Pha lỏng và pha hơi", "Pha lỏng và trạng thái siêu tới hạn"],
+      "dap_an": "Pha rắn và pha hơi"
+    },
+    {
+      "id": 43,
+      "loai": "single_choice",
+      "cau_hoi": "Tại điểm tới hạn (critical point) của nước (374°C, 218 atm):",
+      "cac_lua_chon": ["Không còn ranh giới phân biệt giữa pha lỏng và pha khí", "Nước tồn tại đồng thời cả 3 pha rắn, lỏng, khí", "Nước bị đóng băng hoàn toàn", "Áp suất hơi bão hòa giảm về 0"],
+      "dap_an": "Không còn ranh giới phân biệt giữa pha lỏng và pha khí"
+    },
+    {
+      "id": 44,
+      "loai": "true_false",
+      "cau_hoi": "Quá trình sấy thăng hoa thực phẩm cần được tiến hành ở áp suất thấp hơn áp suất điểm ba pha (0.006 atm)",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 45,
+      "loai": "true_false",
+      "cau_hoi": "Khi áp suất buồng tiệt trùng tăng lên thì nhiệt độ sôi của nước cũng tăng theo",
+      "cac_lua_chon": ["Đúng", "Sai"],
+      "dap_an": "Đúng"
+    },
+    {
+      "id": 46,
+      "loai": "single_choice",
+      "cau_hoi": "Giá trị D121 của Clostridium botulinum trong đồ hộp thường được chọn làm chuẩn là:",
+      "cac_lua_chon": ["0.21 - 0.25 phút", "1.5 - 2.0 phút", "10 phút", "0.02 phút"],
+      "dap_an": "0.21 - 0.25 phút"
+    },
+    {
+      "id": 47,
+      "loai": "single_choice",
+      "cau_hoi": "Quy chuẩn tiệt trùng 12D áp dụng cho thực phẩm có pH nào:",
+      "cac_lua_chon": ["pH > 4.6 (độ acid thấp)", "pH < 4.0", "pH < 3.7", "Tất cả mọi khoảng pH"],
+      "dap_an": "pH > 4.6 (độ acid thấp)"
+    },
+    {
+      "id": 48,
+      "loai": "single_choice",
+      "cau_hoi": "Khi nhiệt độ thanh trùng tăng thêm một giá trị bằng hằng số z thì:",
+      "cac_lua_chon": ["Thời gian giảm 10 lần giá trị D", "Giá trị F tăng gấp 10 lần", "Thời gian xử lý giảm 10 lần", "Tất cả các ý trên"],
+      "dap_an": "Thời gian xử lý giảm 10 lần"
+    }
+  ]
+}

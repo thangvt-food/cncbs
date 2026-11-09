@@ -1,0 +1,52 @@
+Image (vision) handling ───────────────────────────────────────────────────
+# Raster image types a vision model can actually look at. `.svg` is intentionally
+# excluded: it is XML markup, so `_read_files` reads it as text (the model parses
+# the source directly), which is more useful than rasterising it. Before this,
+# every image was fed through `path.read_text(errors="replace")`, turning binary
+# pixels into garbage text — noise for API backends and an outright `exit 1` for
+# the claude-cli backend.
+_VISION_IMAGE_EXTENSIONS = {".png", ".jpg", ".jpeg", ".gif", ".webp"}
+_IMAGE_MEDIA_TYPES = {
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".gif": "image/gif",
+    ".webp": "image/webp",
+}
+# Per-image byte ceiling. Anthropic caps a request at 32 MB and Bedrock images
+# at ~5 MB; 5 MB per image keeps every backend within limits. Oversized images
+# fall back to a text reference (the node is still created, just unseen).
+_MAX_IMAGE_BYTES = 5 * 1024 * 1024
+# Flat token estimate per image for chunk packing. Vision models bill an image
+# at a roughly fixed cost regardless of file size, so estimating by byte size
+# (as the generic path does) would force every large PNG into its own chunk.
+_IMAGE_TOKEN_ESTIMATE = 1_600
+# Hard cap on images per chunk, independent of the token budget. A large
+# token budget would otherwise pack hundreds of images into one request —
+# past provider per-request image limits (Anthropic allows 100), and far too
+# many for the claude-cli Read-tool loop to work through. Keeps memory and
+# request size bounded on image-dense corpora.
+_MAX_IMAGES_PER_CHUNK = 20
+# Backends that read an image by file path (claude-cli's Read tool)
+# instead of inlining base64. They open the file themselves and downsample as
+# needed, so `_MAX_IMAGE_BYTES` does not apply and the bytes never need loading.
+_PATH_IMAGE_BACKENDS = {"claude-cli"}
+
+
+@dataclass
+class _ImageRef:
+    """A single image destined for a vision request.
+
+    `raw` is None when the image is unreadable or exceeds `_MAX_IMAGE_BYTES`, or
+    when the target backend has no vision support — in every such case the
+    renderers emit a text reference instead of pixels, so the image still
+    becomes a graph node.
+    """
+
+    path: Path        # absolute path (claude-cli reads it via the Read tool)
+    rel: str          # path relative to the corpus root (the node's source_file)
+    media_type: str   # e.g. "image/png"
+    raw: bytes | None
+
+    @property
+    def b64(
