@@ -1,3 +1,4 @@
+import { BANK_BY_ID } from './lib/quiz';
 import { Home } from './screens/Home';
 import { Quiz } from './screens/Quiz';
 import { Reader } from './screens/Reader';
@@ -54,7 +55,7 @@ export default function App() {
       <main id="main" className="stack">
         {view === 'home' && (
           <div className="wrap">
-            <Home onStart={start} resume={draft} onResume={() => setSession(draft)} />
+            <Home onStart={start} resume={draft} onResume={() => update(() => draft)} />
           </div>
         )}
         {view === 'quiz' && (

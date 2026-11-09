@@ -1,4 +1,4 @@
-import { BANK_BY_ID, TYPE_META } from '../lib/quiz';
+import { BANK_BY_ID, TYPE_META, fmtClock } from '../lib/quiz';
 import { Navigator } from '../components/Navigator';
 import { Question } from '../components/Question';
 import { Sheet } from '../components/Sheet';
