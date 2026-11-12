@@ -28,6 +28,7 @@ export function Reader({ route, pushToast }) {
     meta,
     chapterId,
     doc,
+    corpus,
     sheet,
     rail,
     toc,
