@@ -11,7 +11,14 @@ import './styles/app.css';
 import './styles/reader.css';
 import './styles/guide.css';
 import './lib/fonts';
-import { setPwa } from './lib/pwa';
+import {
+  applyUpdate,
+  bindRegistration,
+  bindUpdate,
+  checkForUpdate,
+  setPwa,
+  startUpdateWatch,
+} from './lib/pwa';
 import App from './App';
 
 createRoot(document.getElementById('root')).render(
@@ -23,14 +30,26 @@ createRoot(document.getElementById('root')).render(
 /* Bản dev không có service worker (devOptions tắt) nên chỉ ghi nhận ở bản build. */
 if (import.meta.env.PROD) {
   import('virtual:pwa-register').then(({ registerSW }) => {
-    registerSW({
+    const update = registerSW({
       immediate: true,
+      onNeedRefresh() {
+        setPwa({ needRefresh: true });
+        /* Vừa mở app, chưa thao tác gì: áp luôn bản mới để máy không kẹt ở bản cũ. */
+        if (performance.now() < 10_000) applyUpdate();
+      },
       onOfflineReady() {
         setPwa({ cached: true });
       },
       onRegisteredSW(_url, registration) {
-        registration?.addEventListener('updatefound', () => setPwa({ cached: true }));
+        bindRegistration(registration);
+        startUpdateWatch();
+        checkForUpdate(true);
+        if (navigator.serviceWorker.controller) setPwa({ cached: true });
+      },
+      onRegisterError() {
+        /* PWA chỉ là lớp phụ: lỗi đăng ký không được chặn app. */
       },
     });
+    bindUpdate(update);
   });
 }

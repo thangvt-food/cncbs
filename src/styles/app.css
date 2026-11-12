@@ -1349,3 +1349,63 @@ kbd {
     font-size: clamp(64px, 22vw, 96px);
   }
 }
+
+/* Bản mới của PWA */
+
+.update {
+  position: fixed;
+  z-index: 50;
+  left: var(--sp-5);
+  bottom: calc(var(--sp-5) + env(safe-area-inset-bottom, 0px));
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--sp-2) var(--sp-3);
+  max-inline-size: min(560px, calc(100vw - 2 * var(--sp-5)));
+  padding: var(--sp-3) var(--sp-4);
+  background: var(--ink);
+  color: var(--on-ink);
+  border-radius: var(--r-ctl);
+  box-shadow: var(--shadow-lift);
+}
+
+.update__text {
+  flex: 1 1 220px;
+  min-inline-size: 0;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+}
+
+.update__go {
+  flex: 0 0 auto;
+}
+
+.update__later {
+  flex: 0 0 auto;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  font-size: var(--fs-meta);
+  opacity: 0.75;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.home__ver {
+  margin-top: calc(-1 * var(--sp-2));
+  text-align: center;
+  font-size: var(--fs-meta);
+  line-height: var(--lh-meta);
+  color: var(--text-2);
+  opacity: 0.8;
+}
+
+@media (max-width: 639px) {
+  .update {
+    right: var(--sp-4);
+    left: var(--sp-4);
+    bottom: calc(var(--sp-4) + env(safe-area-inset-bottom, 0px));
+    max-inline-size: none;
+  }
+}

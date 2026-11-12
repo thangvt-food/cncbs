@@ -5,6 +5,7 @@ import { OfflineChip } from '../components/OfflineChip';
 import { CHAPTERS, TOTAL_WORDS, bookPercent } from '../lib/book';
 import { readProgress } from '../lib/progress';
 import { openDoc, openGuide } from '../lib/router';
+import { usePwa } from '../lib/pwa';
 
 const COUNTS = [10, 20, 40, 0];
 const MINUTES = [0, 15, 30, 45, 60, 90, 120];
@@ -73,6 +74,7 @@ export function Home({ onStart, resume, onResume }) {
   const [count, setCount] = useState(0);
   const [minutes, setMinutes] = useState(45);
   const [shuffle, setShuffle] = useState(true);
+  const { version, build } = usePwa();
 
   const bank = BANKS.find((b) => b.id === bankId);
   const size = count === 0 ? bank.total : Math.min(count, bank.total);
@@ -346,6 +348,10 @@ export function Home({ onStart, resume, onResume }) {
           Bắt đầu làm bài
         </button>
       </div>
+
+      <p className="home__ver">
+        Bản dựng <span className="num">{build}</span> · v{version}
+      </p>
     </div>
   );
 }

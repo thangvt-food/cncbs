@@ -5,6 +5,7 @@ import { Reader } from './screens/Reader';
 import { Result } from './screens/Result';
 import { PracticeGuide } from './screens/PracticeGuide';
 import { Toasts } from './components/Toasts';
+import { UpdateBanner } from './components/UpdateBanner';
 import { useHashRoute } from './lib/router';
 import { useAppSession } from './screens/useAppSession';
 
@@ -67,6 +68,7 @@ export default function App() {
       </main>
 
       <Toasts toasts={toasts} dismiss={dismiss} />
+      <UpdateBanner />
     </div>
   );
 }
