@@ -1,6 +1,7 @@
 /* Data layer cho form nộp bài TH Công nghệ chế biến sữa.
    Firestore: th-sua-submissions/{id}, th-sua-logs/{pushId}, th-sua-meta/usage.
-   Storage:   th-sua/{id}/{file} (bản active), th-sua/backup/{ts}__{id}__{file} (bản bị xoá/ghi đè).
+   File (Cloudflare R2 qua Worker th-sua-files):
+     th-sua/{id}/{file} (bản active), th-sua/backup/{ts}__{id}__{file} (bản bị xoá/ghi đè).
   usage = tổng số byte đang thực sự nằm trong storage (active + backup), trần 100MB. */
 import {
   addDoc,
@@ -13,8 +14,8 @@ import {
   setDoc,
   updateDoc,
 } from 'firebase/firestore';
-import { deleteObject, getBlob, getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-import { db, storage } from './firebase';
+import { db } from './firebase';
+import { fileUrl, moveFile, uploadFile } from './filesApi';
 
 export const MAX_FILE_BYTES = 20 * 1024 * 1024;
 export const QUOTA_BYTES = 100 * 1024 * 1024;
@@ -119,21 +120,16 @@ async function ghiLog(action, target, by, detail) {
   });
 }
 
-/* Chuyển một object trong storage sang thùng backup kèm timestamp. Trả về path backup, null nếu object không còn. */
+/* Chuyển object trong R2 sang thùng backup kèm timestamp (move phía server). null nếu object không còn. */
 async function saoLuuBackup(storagePath, id) {
-  const src = ref(storage, storagePath);
-  let blob;
-  try {
-    blob = await getBlob(src);
-  } catch {
-    return null;
-  }
   const tenCu = storagePath.split('/').pop();
   const ts = new Date().toISOString().replaceAll(':', '-').slice(0, 19);
   const backupPath = `th-sua/backup/${ts}__${id}__${tenCu}`;
-  await uploadBytes(ref(storage, backupPath), blob, { contentType: blob.type || undefined });
-  await deleteObject(src);
-  return { backupPath, size: blob.size };
+  try {
+    return await moveFile(storagePath, backupPath);
+  } catch {
+    return null;
+  }
 }
 
 export async function submitAssignment({ bai, phan, nguoi, file }) {
@@ -152,7 +148,7 @@ export async function submitAssignment({ bai, phan, nguoi, file }) {
 
   const fileName = tenFileAnToch(file.name);
   const storagePath = `th-sua/${id}/${fileName}`;
-  await uploadBytes(ref(storage, storagePath), file, { contentType: file.type || undefined });
+  await uploadFile(file, storagePath);
   await setDoc(
     docSub(id),
     {
@@ -184,13 +180,8 @@ export async function renameSubmission(id, newName, by) {
   const fileName = tenFileAnToch(newName);
   if (fileName === tenCu) return;
 
-  const usage = await getUsage();
-  if (usage + old.size > QUOTA_BYTES) throw new Error('Không đủ dung lượng 100MB để tạo bản đổi tên.');
-
-  const blob = await getBlob(ref(storage, old.storagePath));
   const storagePath = `th-sua/${id}/${fileName}`;
-  await uploadBytes(ref(storage, storagePath), blob, { contentType: blob.type || undefined });
-  await deleteObject(ref(storage, old.storagePath));
+  await moveFile(old.storagePath, storagePath);
   await updateDoc(docSub(id), { fileName, storagePath, updatedAt: serverTimestamp() });
   await ghiLog('doi_ten', id, by, `"${tenCu}" → "${fileName}"`);
 }
@@ -200,11 +191,11 @@ export async function deleteSubmission(id, by) {
   if (!snap.exists() || snap.data().status !== 'active') throw new Error('Bài này chưa được nộp.');
   const backup = await saoLuuBackup(snap.data().storagePath, id);
   await updateDoc(docSub(id), { status: 'deleted', deletedAt: serverTimestamp(), updatedAt: serverTimestamp() });
-  await ghiLog('xoa', id, by, `File đã chuyển vào backup${backup ? `: ${backup.backupPath}` : ''}`);
+  await ghiLog('xoa', id, by, `File đã chuyển vào backup${backup ? `: ${backup.to}` : ''}`);
 }
 
 export async function downloadUrl(id) {
   const snap = await getDoc(docSub(id));
   if (!snap.exists() || snap.data().status !== 'active') throw new Error('Bài này chưa được nộp.');
-  return getDownloadURL(ref(storage, snap.data().storagePath));
+  return fileUrl(snap.data().storagePath);
 }

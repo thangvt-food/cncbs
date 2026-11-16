@@ -1,8 +1,8 @@
 /* Firebase dùng chung project ant05-efa02 với app mía đường (sugar-cane).
-   API key của Firebase web là public theo thiết kế — quyền thật do rules quyết định. */
+   API key của Firebase web là public theo thiết kế — quyền thật do rules quyết định.
+   File bài nộp KHÔNG nằm ở đây — chuyển sang Cloudflare R2 qua workers/th-sua-files. */
 import { initializeApp } from 'firebase/app';
 import { connectFirestoreEmulator, getFirestore } from 'firebase/firestore';
-import { connectStorageEmulator, getStorage } from 'firebase/storage';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FB_API_KEY || 'AIzaSyBpasZ72EgIovTCVHokMpTYiXWdQolB1qc',
@@ -17,10 +17,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
-export const storage = getStorage(app);
 
 /* DEV + VITE_FB_EMULATOR=1 → nói chuyện với `firebase emulators:start` cục bộ thay vì production. */
 if (import.meta.env.DEV && import.meta.env.VITE_FB_EMULATOR) {
   connectFirestoreEmulator(db, '127.0.0.1', 8080);
-  connectStorageEmulator(storage, '127.0.0.1', 9199);
 }

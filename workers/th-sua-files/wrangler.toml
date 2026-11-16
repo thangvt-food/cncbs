@@ -1,0 +1,7 @@
+name = "th-sua-files"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+
+[[r2_buckets]]
+binding = "FILES"
+bucket_name = "th-sua-files"
