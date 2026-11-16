@@ -5,12 +5,17 @@ import { useEffect, useState } from 'react';
 
 const DOC = /^#doc\/([a-z0-9-]+)(?:\/(\d+))?$/;
 const GUIDE = /^#guide(?:\/([a-z0-9-]+))?$/;
+const SUBMIT = /^#nop-bai(?:\/(\d+)(?:\/(1\.[1-8]))?)?$/;
+const TONGHOP = /^#tong-hop$/;
 
 export function parseHash(hash) {
   const m = DOC.exec(hash || '');
   if (m) return { kind: 'doc', chapterId: m[1], block: m[2] === undefined ? null : Number(m[2]) };
   const g = GUIDE.exec(hash || '');
   if (g) return { kind: 'guide', section: g[1] ?? null };
+  const s = SUBMIT.exec(hash || '');
+  if (s) return { kind: 'submit', bai: s[1] === undefined ? null : Number(s[1]), phan: s[2] ?? null };
+  if (TONGHOP.exec(hash || '')) return { kind: 'tonghop' };
   return null;
 }
 
@@ -39,6 +44,18 @@ export function openGuide(section) {
   const h = section ? `#guide/${section}` : '#guide';
   if (window.location.hash === h) return;
   window.location.hash = h;
+}
+
+/* Điều hướng form nộp bài TH: không tham số → danh sách 5 bài; bai=1 kèm phan → form 1 phần. */
+export function openSubmit(bai, phan) {
+  const h = bai ? (phan ? `#nop-bai/${bai}/${phan}` : `#nop-bai/${bai}`) : '#nop-bai';
+  if (window.location.hash === h) return;
+  window.location.hash = h;
+}
+
+export function openTongHop() {
+  if (window.location.hash === '#tong-hop') return;
+  window.location.hash = '#tong-hop';
 }
 
 /* Ghi vị trí đọc đang xem mà không chất thêm history entry. */

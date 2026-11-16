@@ -4,7 +4,7 @@ import { Check } from '../components/icons';
 import { OfflineChip } from '../components/OfflineChip';
 import { CHAPTERS, TOTAL_WORDS, bookPercent } from '../lib/book';
 import { readProgress } from '../lib/progress';
-import { openDoc, openGuide } from '../lib/router';
+import { openDoc, openGuide, openSubmit, openTongHop } from '../lib/router';
 import { usePwa } from '../lib/pwa';
 
 const COUNTS = [10, 20, 40, 0];
@@ -171,6 +171,23 @@ export function Home({ onStart, resume, onResume }) {
         <button type="button" className="btn btn--primary" onClick={() => openGuide()}>
           Mở hướng dẫn
         </button>
+      </section>
+
+      <section className="practice-guide-cta">
+        <div className="practice-guide-cta__body">
+          <h2>Nộp bài thực hành</h2>
+          <p className="meta">
+            5 bài TH Chế biến Sữa: Bài 1 nộp theo từng phần (1.1–1.8), bài 2–5 nộp cả bài với thông tin 2 người viết.
+          </p>
+        </div>
+        <div className="submit__cta-btns">
+          <button type="button" className="btn btn--primary" onClick={() => openSubmit()}>
+            Nộp bài
+          </button>
+          <button type="button" className="btn btn--ghost" onClick={openTongHop}>
+            Tổng hợp
+          </button>
+        </div>
       </section>
 
       <div className="home__cols">

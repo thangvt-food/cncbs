@@ -1,0 +1,17 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Mặc định của project: chỉ bên đã đăng nhập được đọc/ghi phần còn lại (yangio-web, sugar-cane…).
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Bài nộp TH Sữa: công khai trong nhóm, không tài khoản; file mới ≤20MB.
+    // DELETE phải tách khỏi write vì request.resource không tồn tại khi xoá.
+    match /th-sua/{allPaths=**} {
+      allow read: if true;
+      allow delete: if true;
+      allow create, update: if request.resource.size < 20 * 1024 * 1024;
+    }
+  }
+}

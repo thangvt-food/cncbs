@@ -1,0 +1,38 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /stories/{storyId} {
+      allow read: if true;
+      allow write: if request.auth != null;
+
+      match /chapters/{chapterId} {
+        allow read: if true;
+        allow write: if request.auth != null;
+      }
+    }
+
+    match /meta/{doc} {
+      allow read: if true;
+      allow write: if request.auth != null;
+    }
+
+    // tài khoản ingest của worker (hash PBKDF2, salt).
+    // Lưu ý: SA của worker dùng chung token mint/ghi nên chưa chặn được bằng rules —
+    // hash+salt nằm CÙNG một doc, chỉ người giữ BOOTSTRAP_KEY mới đăng ký được account.
+    match /ingestAccounts/{account} {
+      allow read, write: if request.auth != null;
+    }
+
+    // Form nộp bài TH Công nghệ chế biến Sữa (app cncbs) — chủ đích không phân quyền,
+    // chỉ mở ba collection th-sua-*; trần 20MB/file do app và storage rules chặn.
+    match /th-sua-submissions/{doc} {
+      allow read, write: if true;
+    }
+    match /th-sua-logs/{doc} {
+      allow read, write: if true;
+    }
+    match /th-sua-meta/{doc} {
+      allow read, write: if true;
+    }
+  }
+}

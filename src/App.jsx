@@ -4,6 +4,8 @@ import { Quiz } from './screens/Quiz';
 import { Reader } from './screens/Reader';
 import { Result } from './screens/Result';
 import { PracticeGuide } from './screens/PracticeGuide';
+import { NoiBai } from './screens/NoiBai';
+import { TongHop } from './screens/TongHop';
 import { Toasts } from './components/Toasts';
 import { UpdateBanner } from './components/UpdateBanner';
 import { useHashRoute } from './lib/router';
@@ -21,11 +23,15 @@ export default function App() {
       ? 'reader'
       : route?.kind === 'guide'
         ? 'guide'
-        : !session
-          ? 'home'
-          : session.finishedAt
-            ? 'result'
-            : 'quiz';
+        : route?.kind === 'submit'
+          ? 'submit'
+          : route?.kind === 'tonghop'
+            ? 'tonghop'
+            : !session
+              ? 'home'
+              : session.finishedAt
+                ? 'result'
+                : 'quiz';
   const position = session && !session.finishedAt ? session.index + 1 : 0;
 
   return (
@@ -65,6 +71,8 @@ export default function App() {
         {view === 'result' && <Result session={session} onRetry={retry} onHome={exit} />}
         {view === 'reader' && <Reader route={route} pushToast={push} />}
         {view === 'guide' && <PracticeGuide route={route} pushToast={push} />}
+        {view === 'submit' && <NoiBai route={route} pushToast={push} />}
+        {view === 'tonghop' && <TongHop pushToast={push} />}
       </main>
 
       <Toasts toasts={toasts} dismiss={dismiss} />

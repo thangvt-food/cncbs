@@ -1,0 +1,212 @@
+/* Màn nộp bài + bảng tổng hợp TH Sữa. Chỉ dùng token từ tokens.css và class nền (.field, .btn, .panel, .chip). */
+
+.submit {
+  padding-top: var(--sp-5);
+  padding-bottom: var(--sp-7);
+}
+
+.submit__head {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-4);
+}
+
+.submit__h1 {
+  flex: 1;
+  margin: 0;
+  font-size: var(--fs-title);
+  line-height: var(--lh-title);
+}
+
+.submit__h2 {
+  margin: 0 0 var(--sp-2);
+  font-size: var(--fs-ask);
+  line-height: var(--lh-ask);
+}
+
+.submit__list {
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.submit__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  text-align: left;
+  padding: var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--hair);
+  border-radius: var(--r-card);
+  cursor: pointer;
+  color: inherit;
+  font: inherit;
+}
+
+.submit__row:hover {
+  border-color: var(--hair-strong);
+}
+
+.submit__row-num {
+  font-size: var(--fs-title);
+  line-height: 1;
+  color: var(--board);
+  min-width: 2.2em;
+}
+
+.submit__row-main {
+  flex: 1;
+  display: grid;
+  gap: var(--sp-1);
+}
+
+.submit__row-title {
+  font-weight: 600;
+}
+
+.submit__form {
+  display: grid;
+  gap: var(--sp-4);
+  padding: var(--sp-5);
+}
+
+.submit__nguoi {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.submit__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-3);
+}
+
+.submit__loi {
+  color: var(--cinnabar);
+  font-weight: 600;
+  margin: 0;
+}
+
+.submit__dahave {
+  padding: var(--sp-3) var(--sp-4);
+  border-left: 3px solid var(--turmeric);
+  margin: 0;
+}
+
+.submit__cta-btns {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+/* Bảng tổng hợp */
+
+.th__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-4);
+}
+
+.th__meta p {
+  margin: 0;
+}
+
+.th__group {
+  margin-bottom: var(--sp-5);
+}
+
+.th__group h2 {
+  margin-bottom: var(--sp-3);
+}
+
+.th__row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  margin-bottom: var(--sp-2);
+  position: relative;
+  flex-wrap: wrap;
+}
+
+.th__check {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid var(--hair-strong);
+  flex-shrink: 0;
+}
+
+.th__check[data-on='true'] {
+  background: var(--board);
+  border-color: var(--board);
+}
+
+.th__main {
+  flex: 1;
+  min-width: 200px;
+  display: grid;
+  gap: 2px;
+}
+
+.th__title {
+  font-weight: 600;
+}
+
+.th__thieu {
+  color: var(--cinnabar);
+  font-weight: 600;
+}
+
+.th__actions {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.th__menu {
+  width: 100%;
+  border-top: 1px solid var(--hair);
+  padding-top: var(--sp-3);
+  display: grid;
+  gap: var(--sp-2);
+}
+
+.th__rename {
+  display: flex;
+  gap: var(--sp-2);
+}
+
+.th__rename input {
+  flex: 1;
+}
+
+.th__xoa {
+  justify-self: start;
+  color: var(--cinnabar);
+}
+
+.th__logs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: var(--sp-3);
+}
+
+.th__log {
+  display: flex;
+  gap: var(--sp-3);
+  align-items: baseline;
+  border-bottom: 1px solid var(--hair);
+  padding-bottom: var(--sp-3);
+}
+
+.th__log-time {
+  color: var(--muted);
+  white-space: nowrap;
+  font-size: var(--fs-meta);
+}
