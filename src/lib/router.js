@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const DOC = /^#doc\/([a-z0-9-]+)(?:\/(\d+))?$/;
 const GUIDE = /^#guide(?:\/([a-z0-9-]+))?$/;
-const SUBMIT = /^#nop-bai(?:\/(\d+)(?:\/(1\.[1-8]))?)?$/;
+const SUBMIT = /^#nop-bai(?:\/(\d+)(?:\/([\w.-]+))?)?$/;
 const TONGHOP = /^#tong-hop$/;
 
 export function parseHash(hash) {

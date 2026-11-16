@@ -1,214 +1,305 @@
-import { useEffect, useState } from 'react';
-import { closeDoc, openSubmit, openTongHop } from '../lib/router';
-import { MAX_FILE_BYTES, TH_SUA_BAI, formatBytes, listSubmissions, nhannot, submissionId, submitAssignment } from '../lib/submissions';
+import { useCallback, useEffect, useState } from 'react';
+import {
+  ArrowLeft,
+  Check,
+  FileText,
+  Link as LinkIcon,
+  RefreshCw,
+  User,
+} from '../components/icons';
+import { openSubmit, openTongHop } from '../lib/router';
 import { readKey, writeKey } from '../lib/store';
+import { TH_SUA_BAI, formatBytes, getLogs, laLink, listSubmissions, submissionId } from '../lib/submissions';
+import { ProfileSheet } from './submit/ProfileSheet';
+import { SubmitDetail } from './submit/SubmitDetail';
+import { OverviewPanel } from './submit/OverviewPanel';
+import { LogsPanel } from './submit/LogsPanel';
+import { tinhTienSu } from './submit/shared';
 import '../styles/submit.css';
 
-function NguoiField({ label, value, onChange }) {
-  return (
-    <div className="field submit__nguoi">
-      <span className="field__label">{label}</span>
-      <input
-        type="text"
-        placeholder="Họ và tên"
-        value={value.ten}
-        onChange={(e) => onChange({ ...value, ten: e.target.value })}
-      />
-      <input
-        type="text"
-        inputMode="numeric"
-        placeholder="MSSV"
-        value={value.mssv}
-        onChange={(e) => onChange({ ...value, mssv: e.target.value.trim() })}
-      />
-    </div>
-  );
-}
+/* Màn hình chính: Nộp bài & Bảng tổng hợp thực hành.
+   Chi tiết từng chế độ xem nằm trong src/screens/submit/. */
+export function NoiBai({ route, pushToast, initialTab }) {
+  const [activeTab, setActiveTab] = useState(initialTab || (route?.kind === 'tonghop' ? 'tonghop' : 'submit'));
+  const [subs, setSubs] = useState({});
+  const [logs, setLogs] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [showProfile, setShowProfile] = useState(false);
+  const [me, setMe] = useState(() => readKey('thsua:me', { ten: '', mssv: '' }));
 
-function FormNop({ bai, phan, pushToast }) {
-  const me = readKey('thsua:me', { ten: '', mssv: '' });
-  [me.ten, me.mssv] = [String(me.ten || ''), String(me.mssv || '')];
-
-  const [nguoi1, setNguoi1] = useState({ ...me });
-  const [nguoi2, setNguoi2] = useState({ ten: '', mssv: '' });
-  const [file, setFile] = useState(null);
-  const [busy, setBusy] = useState(false);
-  const [loi, setLoi] = useState('');
-
-  const nhieuNguoi = !bai.phans;
-  const tenTruyCap = bai.phans ? `${phan}. ` : '';
-  const mucTieu = submissionId(bai.bai, bai.phans ? phan : null);
-  const nop = async () => {
-    setLoi('');
-    if (!nguoi1.ten.trim() || !nguoi1.mssv.trim()) {
-      setLoi('Nhập đầy đủ tên và MSSV.');
-      return;
-    }
-    const nguoi = [{ ten: nguoi1.ten.trim(), mssv: nguoi1.mssv.trim() }];
-    if (nhieuNguoi) {
-      if (!nguoi2.ten.trim() || !nguoi2.mssv.trim()) {
-        setLoi('Bài này 2 người viết — nhập tên và MSSV cả người còn lại.');
-        return;
-      }
-      nguoi.push({ ten: nguoi2.ten.trim(), mssv: nguoi2.mssv.trim() });
-    }
-    if (!file) {
-      setLoi('Chọn file báo cáo trước đã.');
-      return;
-    }
-    if (file.size > MAX_FILE_BYTES) {
-      setLoi(`File ${formatBytes(file.size)} vượt trần 20MB.`);
-      return;
-    }
-    setBusy(true);
-    try {
-      writeKey('thsua:me', nguoi[0]);
-      await submitAssignment({ bai: bai.bai, phan: bai.phans ? phan : null, nguoi, file });
-      pushToast(`Đã nộp ${nhannot(mucTieu)}.`);
-      openTongHop();
-    } catch (e) {
-      setLoi(e?.message || 'Nộp thất bại — kiểm tra mạng rồi thử lại.');
-    } finally {
-      setBusy(false);
-    }
-  };
-
-  return (
-    <div className="panel submit__form">
-      <h2 className="submit__h2">
-        {tenTruyCap}
-        {bai.phans ? bai.phans.find((p) => p.phan === phan).ten : bai.tieuDe}
-      </h2>
-      <p className="meta">{bai.moTa}</p>
-
-      <NguoiField label="Người nộp / người viết 1" value={nguoi1} onChange={setNguoi1} />
-      {nhieuNguoi && <NguoiField label="Người viết 2" value={nguoi2} onChange={setNguoi2} />}
-
-      <div className="field">
-        <span className="field__label">File báo cáo (tối đa 20MB)</span>
-        <input
-          type="file"
-          accept=".pdf,.doc,.docx,.ppt,.pptx,.zip,.rar"
-          onChange={(e) => {
-            setFile(e.target.files?.[0] ?? null);
-            setLoi('');
-          }}
-        />
-        {file && (
-          <p className="field__note">
-            {file.name} · {formatBytes(file.size)}
-          </p>
-        )}
-      </div>
-
-      {nhieuNguoi && <p className="field__note">Nộp lại sẽ tự sao lưu bản cũ vào thùng backup và ghi nhật ký.</p>}
-      {loi && <p className="submit__loi">{loi}</p>}
-
-      <div className="submit__actions">
-        <button type="button" className="btn btn--ghost" onClick={() => openSubmit(bai.bai)} disabled={busy}>
-          Quay lại
-        </button>
-        <button type="button" className="btn btn--primary" onClick={nop} disabled={busy}>
-          {busy ? 'Đang nộp…' : 'Nộp bài'}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-export function NoiBai({ route, pushToast }) {
-  const [status, setStatus] = useState({});
+  const loadData = useCallback(() => {
+    setLoading(true);
+    Promise.all([listSubmissions(), getLogs()])
+      .then(([s, l]) => {
+        setSubs(s || {});
+        setLogs(l || []);
+      })
+      .catch((err) => {
+        pushToast(err?.message || 'Không thể tải dữ liệu.');
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, [pushToast]);
 
   useEffect(() => {
+    loadData();
     window.scrollTo({ top: 0 });
-    listSubmissions().then(setStatus).catch(() => {});
-  }, [route]);
+    if (route?.kind === 'tonghop') setActiveTab('tonghop');
+    else if (route?.kind === 'submit') setActiveTab('submit');
+  }, [loadData, route]);
 
-  const bai = route?.bai ? TH_SUA_BAI.find((b) => b.bai === route.bai) : null;
+  const { thieu, done, total } = tinhTienSu(subs);
 
-  let content;
-  if (!bai) {
-    content = (
-      <div className="submit__list">
-        {TH_SUA_BAI.map((b) => {
-          const daNop = b.phans
-            ? b.phans.filter((p) => status[submissionId(b.bai, p.phan)]?.status === 'active').length
-            : status[submissionId(b.bai)]?.status === 'active'
-              ? 1
-              : 0;
-          const tong = b.phans ? b.phans.length : 1;
-          return (
-            <button type="button" key={b.bai} className="submit__row" onClick={() => openSubmit(b.bai)}>
-              <span className="submit__row-num num">Bài {b.bai}</span>
-              <span className="submit__row-main">
-                <span className="submit__row-title">{b.tieuDe}</span>
-                <span className="meta">{b.moTa}</span>
-              </span>
-              <span className="chip" data-done={String(daNop === tong)}>
-                {daNop}/{tong}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    );
-  } else if (bai.phans && !route.phan) {
-    content = (
-      <div className="submit__list">
-        {bai.phans.map((p) => {
-          const s = status[submissionId(bai.bai, p.phan)];
-          const active = s?.status === 'active';
-          return (
-            <button type="button" key={p.phan} className="submit__row" onClick={() => openSubmit(bai.bai, p.phan)}>
-              <span className="submit__row-num num">{p.phan}</span>
-              <span className="submit__row-main">
-                <span className="submit__row-title">{p.ten}</span>
-                {active && (
-                  <span className="meta">
-                    Đã nộp: {s.nguoi?.[0]?.ten} ({s.nguoi?.[0]?.mssv}) — {s.fileName}
-                  </span>
-                )}
-              </span>
-              <span className="chip" data-done={String(active)}>
-                {active ? 'Đã nộp' : 'Chưa nộp'}
-              </span>
-            </button>
-          );
-        })}
-      </div>
-    );
-  } else if (bai.phans && route.phan) {
-    content = <FormNop bai={bai} phan={route.phan} pushToast={pushToast} />;
-  } else {
-    const s = status[submissionId(bai.bai)];
-    content = (
-      <>
-        {s?.status === 'active' && (
-          <p className="submit__dahave panel">
-            Bài này đã nộp bởi{' '}
-            <strong>
-              {s.nguoi?.map((n) => `${n.ten} (${n.mssv})`).join(' + ')}
-            </strong>{' '}
-            — {s.fileName}. Nộp lại sẽ sao lưu bản cũ.
-          </p>
-        )}
-        <FormNop bai={bai} phan={null} pushToast={pushToast} />
-      </>
-    );
-  }
+  const currentBai = route?.bai ? TH_SUA_BAI.find((b) => b.bai === route.bai) : null;
+  const currentPhan = route?.phan || null;
+  const currentTargetId = currentBai ? submissionId(currentBai.bai, currentBai.phans ? currentPhan : null) : null;
+  const currentSub = currentTargetId && subs[currentTargetId]?.status === 'active' ? subs[currentTargetId] : null;
 
   return (
-    <div className="wrap submit">
-      <div className="submit__head">
-        <button type="button" className="btn btn--ghost btn--sm" onClick={closeDoc}>
-          ← Trang chủ
+    <div className="submit-wrap">
+      <header className="submit-header">
+        <div className="submit-header__top">
+
+
+          <div className="submit-header__tools">
+            <button
+              type="button"
+              className="submit-header__user-pill"
+              onClick={() => setShowProfile(true)}
+              title="Thông tin sinh viên của bạn"
+            >
+              <User width={14} height={14} style={{ color: 'var(--board)' }} />
+              {me?.ten ? (
+                <span>
+                  <strong>{me.ten}</strong>{' '}
+                  <span className="num" style={{ color: 'var(--text-2)' }}>({me.mssv})</span>
+                </span>
+              ) : (
+                <span style={{ color: 'var(--muted)' }}>+ Điền tên/MSSV</span>
+              )}
+            </button>
+
+            <button
+              type="button"
+              className="submit-back-btn submit-header__refresh"
+              onClick={loadData}
+              title="Làm mới dữ liệu"
+              disabled={loading}
+            >
+              <RefreshCw className={loading ? 'spinner' : ''} width={13} height={13} />
+            </button>
+          </div>
+        </div>
+
+        <div className="submit-header__main">
+          <h1 className="submit-header__title">Nộp bài Thực hành — CN Chế biến Sữa</h1>
+          <span className="progress-chip">
+            Đã nộp {done}/{total} bài
+          </span>
+        </div>
+      </header>
+
+      <nav className="submit-tabs" role="tablist">
+        <button
+          type="button"
+          role="tab"
+          className="submit-tab"
+          aria-selected={activeTab === 'submit'}
+          onClick={() => {
+            setActiveTab('submit');
+            openSubmit();
+          }}
+        >
+          <FileText width={15} height={15} />
+          <span>Nộp bài</span>
         </button>
-        <h1 className="submit__h1">Nộp bài thực hành — Chế biến Sữa</h1>
-        <button type="button" className="btn btn--ghost btn--sm" onClick={openTongHop}>
-          Bảng tổng hợp
+        <button
+          type="button"
+          role="tab"
+          className="submit-tab"
+          aria-selected={activeTab === 'tonghop'}
+          onClick={() => {
+            setActiveTab('tonghop');
+            openTongHop();
+          }}
+        >
+          <Check width={15} height={15} />
+          <span>Tổng hợp</span>
+          {thieu.length > 0 && <span className="submit-tab__badge num">{thieu.length}</span>}
         </button>
-      </div>
-      {content}
+        <button
+          type="button"
+          role="tab"
+          className="submit-tab"
+          aria-selected={activeTab === 'logs'}
+          onClick={() => setActiveTab('logs')}
+        >
+          <RefreshCw width={14} height={14} />
+          <span>Nhật ký</span>
+        </button>
+      </nav>
+
+      {/* ---------------- TAB 1: NỘP BÀI ---------------- */}
+      {activeTab === 'submit' && (
+        <>
+          {/* Cấp 1: Danh sách 5 bài */}
+          {!currentBai && (
+            <div className="assignments-list">
+              {TH_SUA_BAI.map((b) => {
+                const isPartBai = Boolean(b.phans);
+                const doneCount = isPartBai
+                  ? b.phans.filter((p) => subs[submissionId(b.bai, p.phan)]?.status === 'active').length
+                  : subs[submissionId(b.bai)]?.status === 'active'
+                    ? 1
+                    : 0;
+                const totalCount = isPartBai ? b.phans.length : 1;
+                const isFullyDone = doneCount === totalCount;
+                const singleSub = !isPartBai ? subs[submissionId(b.bai)] : null;
+
+                return (
+                  <article key={b.bai} className="assignment-card">
+                    <div className="assignment-card__header">
+                      <div className="assignment-card__title-box">
+                        <span className="assignment-card__tag num">Bài {b.bai}</span>
+                        <h3 className="assignment-card__title">{b.tieuDe}</h3>
+                      </div>
+                      <span className="chip chip--tiny" data-done={String(isFullyDone)}>
+                        {isPartBai ? `${doneCount}/${totalCount} phần` : isFullyDone ? 'Đã nộp' : 'Chưa nộp'}
+                      </span>
+                    </div>
+
+                    <p className="assignment-card__desc">{b.moTa}</p>
+
+                    {singleSub?.status === 'active' && (
+                      <div className="assignment-card__submitter">
+                        <Check width={13} height={13} />
+                        <span>
+                          <strong>{singleSub.nguoi?.map((n) => `${n.ten} (${n.mssv})`).join(' + ')}</strong>
+                          {' — '}
+                          {laLink(singleSub) ? (
+                            <LinkIcon width={11} height={11} style={{ verticalAlign: '-1px' }} />
+                          ) : null}
+                          {singleSub.fileName}
+                          {laLink(singleSub) ? '' : ` (${formatBytes(singleSub.size)})`}
+                        </span>
+                      </div>
+                    )}
+
+                    <div className="assignment-card__footer">
+                      <button
+                        type="button"
+                        className={`btn btn--sm ${isFullyDone ? 'btn--ghost' : 'btn--primary'}`}
+                        onClick={() => openSubmit(b.bai)}
+                      >
+                        {isPartBai ? 'Xem 8 phần →' : isFullyDone ? 'Xem lại / nộp lại' : 'Nộp bài'}
+                      </button>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          )}
+
+          {/* Cấp 2: Danh sách 8 phần Bài 1 */}
+          {currentBai && currentBai.phans && !currentPhan && (
+            <div className="parts-view">
+              <div className="parts-header">
+                <button type="button" className="submit-back-btn" onClick={() => openSubmit()}>
+                  <ArrowLeft width={14} height={14} />
+                  <span>5 bài thực hành</span>
+                </button>
+                <span className="meta">Phòng 104 Cẩm Tú — mỗi người 1 phần</span>
+              </div>
+
+              <div className="parts-grid">
+                {currentBai.phans.map((p) => {
+                  const s = subs[submissionId(currentBai.bai, p.phan)];
+                  const active = s?.status === 'active';
+
+                  return (
+                    <article key={p.phan} className="part-card" data-done={String(active)}>
+                      <div className="part-card__header">
+                        <span className="part-card__num num">{p.phan}</span>
+                        <span className="chip chip--tiny" data-done={String(active)}>
+                          {active ? 'Đã nộp' : 'Chưa nộp'}
+                        </span>
+                      </div>
+
+                      <h4 className="part-card__title">{p.ten}</h4>
+
+                      <div className="part-card__body">
+                        {active ? (
+                          <>
+                            <div className="part-card__owner">
+                              <User width={12} height={12} style={{ color: 'var(--board)' }} />
+                              <span>
+                                <strong>{s.nguoi?.[0]?.ten}</strong> ({s.nguoi?.[0]?.mssv})
+                              </span>
+                            </div>
+                            <div className="part-card__file">
+                              {laLink(s) ? (
+                                <LinkIcon width={11} height={11} style={{ verticalAlign: '-1px' }} />
+                              ) : null}
+                              {s.fileName}
+                              {laLink(s) ? '' : ` (${formatBytes(s.size)})`}
+                            </div>
+                          </>
+                        ) : (
+                          <div className="part-card__owner" data-empty="true">
+                            Chưa có ai nộp phần này.
+                          </div>
+                        )}
+                      </div>
+
+                      <div className="part-card__footer">
+                        <button
+                          type="button"
+                          className={`btn btn--sm ${active ? 'btn--ghost' : 'btn--primary'}`}
+                          onClick={() => openSubmit(currentBai.bai, p.phan)}
+                        >
+                          {active ? 'Xem lại / nộp lại' : 'Nộp bài →'}
+                        </button>
+                      </div>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+
+          {/* Cấp 3: chi tiết 1 bài/phần — banner bản nộp + form */}
+          {currentBai && (!currentBai.phans || currentPhan) && (
+            <SubmitDetail
+              bai={currentBai}
+              phan={currentPhan}
+              sub={currentSub}
+              me={me}
+              pushToast={pushToast}
+              backLabel={currentBai.phans ? '8 phần Bài 1' : '5 bài thực hành'}
+              onBack={() => openSubmit(currentBai.phans ? currentBai.bai : undefined)}
+              onChanged={loadData}
+            />
+          )}
+        </>
+      )}
+
+      {/* ---------------- TAB 2: TỔNG HỢP (chỉ kiểm tra) ---------------- */}
+      {activeTab === 'tonghop' && <OverviewPanel subs={subs} />}
+
+      {/* ---------------- TAB 3: NHẬT KÝ ---------------- */}
+      {activeTab === 'logs' && <LogsPanel logs={logs} />}
+
+      <ProfileSheet
+        open={showProfile}
+        onClose={() => setShowProfile(false)}
+        current={me}
+        onSave={(updated) => {
+          setMe(updated);
+          writeKey('thsua:me', updated);
+          pushToast('Đã lưu thông tin sinh viên.');
+        }}
+      />
     </div>
   );
 }

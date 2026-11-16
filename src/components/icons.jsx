@@ -114,3 +114,78 @@ export const Pen = (p) => (
   </svg>
 );
 
+export const ArrowLeft = (p) => (
+  <svg {...base} {...p}>
+    <path d="M16 10H4M9 5l-5 5 5 5" />
+  </svg>
+);
+
+export const Upload = (p) => (
+  <svg {...base} {...p}>
+    <path d="M3.5 14v2.5a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V14M10 3.5v10M6.5 7 10 3.5 13.5 7" />
+  </svg>
+);
+
+export const Download = (p) => (
+  <svg {...base} {...p}>
+    <path d="M3.5 14v2.5a2 2 0 0 0 2 2h9a2 2 0 0 0 2-2V14M10 13.5V3.5M6.5 10 10 13.5 13.5 10" />
+  </svg>
+);
+
+export const Trash = (p) => (
+  <svg {...base} {...p}>
+    <path d="M3 5h14M7 5V3.5a1.5 1.5 0 0 1 1.5-1.5h3a1.5 1.5 0 0 1 1.5 1.5V5M15 5v11.5a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V5M8.5 9v6M11.5 9v6" />
+  </svg>
+);
+
+export const FileText = (p) => (
+  <svg {...base} {...p}>
+    <path d="M12 2.5H5a1.5 1.5 0 0 0-1.5 1.5v12A1.5 1.5 0 0 0 5 17.5h10a1.5 1.5 0 0 0 1.5-1.5V7.5L12 2.5z" />
+    <path d="M12 2.5v5h5M7 10.5h6M7 13.5h4" />
+  </svg>
+);
+
+export const User = (p) => (
+  <svg {...base} {...p}>
+    <path d="M16 17v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 15.5V17" />
+    <circle cx="10" cy="6.5" r="3.5" />
+  </svg>
+);
+
+export const Users = (p) => (
+  <svg {...base} {...p}>
+    <path d="M14 17v-1.5a3.5 3.5 0 0 0-3-3.45M6.5 12A3.5 3.5 0 0 0 3 15.5V17M11 4.2a3.5 3.5 0 0 1 0 6.6M7.5 12a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z" />
+  </svg>
+);
+
+export const RefreshCw = (p) => (
+  <svg {...base} {...p}>
+    <path d="M17.5 4.5v4h-4M2.5 15.5v-4h4" />
+    <path d="M3.8 8.8a7 7 0 0 1 11.9-3.3l1.8 2M16.2 11.2a7 7 0 0 1-11.9 3.3l-1.8-2" />
+  </svg>
+);
+
+export const AlertCircle = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="10" cy="10" r="7.5" />
+    <path d="M10 6.5v4M10 13.5h.01" />
+  </svg>
+);
+
+export const MoreVertical = (p) => (
+  <svg {...base} {...p}>
+    <circle cx="10" cy="4.5" r="1.5" fill="currentColor" stroke="none" />
+    <circle cx="10" cy="10" r="1.5" fill="currentColor" stroke="none" />
+    <circle cx="10" cy="15.5" r="1.5" fill="currentColor" stroke="none" />
+  </svg>
+);
+
+export const Link = (p) => (
+  <svg {...base} {...p}>
+    <path d="M8.2 11.8a3.2 3.2 0 0 0 4.6 0l2.4-2.4a3.25 3.25 0 0 0-4.6-4.6l-1.2 1.2" />
+    <path d="M11.8 8.2a3.2 3.2 0 0 0-4.6 0L4.8 10.6a3.25 3.25 0 0 0 4.6 4.6l1.2-1.2" />
+  </svg>
+);
+
+
+
