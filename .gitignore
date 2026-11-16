@@ -12,3 +12,4 @@ data/sources/archive/
 
 # Đồ thị phân tích repo do graphify sinh — tái tạo được bằng /graphify, không commit
 graphify-out/
+.wrangler/
