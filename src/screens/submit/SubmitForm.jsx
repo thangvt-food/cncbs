@@ -260,7 +260,7 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
               maxLength={600}
             />
             <span className="link-hint">
-              Google Docs, Canva, Figma, Drive… — nhớ bật quyền xem/sửa cho giảng viên trước khi nộp.
+              Google Docs, Canva, Figma, Drive… — nhớ bật quyền xem/sửa trước khi nộp.
             </span>
           </div>
         )}
