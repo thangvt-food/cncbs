@@ -8,11 +8,28 @@ export const ACTION_LABEL = {
 };
 
 export function formatTimestamp(ts) {
-  if (!ts?.seconds) return '—';
-  return new Date(ts.seconds * 1000).toLocaleString('vi-VN', { hour12: false });
+  if (!ts) return '—';
+  if (ts.seconds) {
+    return new Date(ts.seconds * 1000).toLocaleString('vi-VN', { hour12: false });
+  }
+  if (typeof ts === 'number' || ts instanceof Date) {
+    return new Date(ts).toLocaleString('vi-VN', { hour12: false });
+  }
+  return '—';
 }
 
-export function tinhTienSu(subs) {
+export function isSafeHttpUrl(url) {
+  if (!url || typeof url !== 'string') return false;
+  try {
+    const parsed = new URL(url);
+    return parsed.protocol === 'http:' || parsed.protocol === 'https:';
+  } catch {
+    return false;
+  }
+}
+
+export function tinhTienSu(subs = {}) {
+  const safeSubs = subs || {};
   const thieu = [];
   let done = 0;
   let total = 0;
@@ -23,7 +40,7 @@ export function tinhTienSu(subs) {
     for (const it of danhsach) {
       total += 1;
       const id = submissionId(it.bai, it.phan);
-      if (subs[id]?.status === 'active') done += 1;
+      if (safeSubs[id]?.status === 'active') done += 1;
       else thieu.push({ ...it, id });
     }
   }
@@ -31,6 +48,7 @@ export function tinhTienSu(subs) {
 }
 
 export function pageTitle(baiObj, phan) {
+  if (!baiObj) return '';
   const p = phan ? baiObj.phans?.find((x) => x.phan === phan) : null;
   return p ? `Phần ${phan}: ${p.ten}` : `Bài ${baiObj.bai}: ${baiObj.tieuDe}`;
 }

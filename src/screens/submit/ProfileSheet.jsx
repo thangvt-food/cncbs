@@ -13,8 +13,8 @@ export function ProfileSheet({ open, onClose, current, onSave }) {
   const handleSave = (e) => {
     e.preventDefault();
     if (!ten.trim() || !mssv.trim()) return;
-    onSave({ ten: ten.trim(), mssv: mssv.trim() });
-    onClose();
+    onSave?.({ ten: ten.trim(), mssv: mssv.trim() });
+    onClose?.();
   };
 
   return (
@@ -29,6 +29,8 @@ export function ProfileSheet({ open, onClose, current, onSave }) {
             id="me-ten"
             className="form-input"
             type="text"
+            autoComplete="name"
+            maxLength={60}
             placeholder="Ví dụ: Nguyễn Văn A"
             value={ten}
             onChange={(e) => setTen(e.target.value)}
@@ -42,6 +44,8 @@ export function ProfileSheet({ open, onClose, current, onSave }) {
             className="form-input"
             type="text"
             inputMode="numeric"
+            autoComplete="off"
+            maxLength={15}
             placeholder="Ví dụ: 21127001"
             value={mssv}
             onChange={(e) => setMssv(e.target.value.trim())}

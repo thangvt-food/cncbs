@@ -8,11 +8,11 @@ import {
 } from '../../lib/submissions';
 import { DeleteSheet } from './DeleteSheet';
 import { SubmitForm } from './SubmitForm';
-import { formatTimestamp, pageTitle } from './shared';
+import { formatTimestamp, isSafeHttpUrl, pageTitle } from './shared';
 
 export function SubmitDetail({ bai, phan, sub, me, pushToast, backLabel, onBack, onChanged }) {
-  const isPart = Boolean(bai.phans) && phan;
-  const targetId = submissionId(bai.bai, isPart ? phan : null);
+  const isPart = Boolean(bai?.phans) && phan;
+  const targetId = bai ? submissionId(bai.bai, isPart ? phan : null) : '';
   const active = sub?.status === 'active' ? sub : null;
   const [confirmDelete, setConfirmDelete] = useState(false);
 
@@ -22,6 +22,7 @@ export function SubmitDetail({ bai, phan, sub, me, pushToast, backLabel, onBack,
       ? active.link
       : getSubmissionFileUrl(active.storagePath)
     : '';
+  const safeMoUrl = isSafeHttpUrl(moUrl) ? moUrl : null;
 
   return (
     <div className="submit-form-panel">
@@ -39,7 +40,7 @@ export function SubmitDetail({ bai, phan, sub, me, pushToast, backLabel, onBack,
           )}
         </div>
         <p className="submit-form-head__desc">
-          {isPart ? 'Mỗi sinh viên trong tổ nhận 1 phần riêng biệt.' : bai.moTa}
+          {isPart ? 'Mỗi sinh viên trong tổ nhận 1 phần riêng biệt.' : bai?.moTa}
         </p>
       </div>
 
@@ -59,16 +60,18 @@ export function SubmitDetail({ bai, phan, sub, me, pushToast, backLabel, onBack,
             )}
           </div>
           <div className="sub-current__actions">
-            <a
-              href={moUrl}
-              download={isLink ? undefined : active.fileName}
-              className="btn btn--primary btn--sm"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {isLink ? <LinkIcon width={13} height={13} /> : <Download width={13} height={13} />}
-              <span>{isLink ? 'Mở link' : 'Tải file'}</span>
-            </a>
+            {safeMoUrl && (
+              <a
+                href={safeMoUrl}
+                download={isLink ? undefined : active.fileName}
+                className="btn btn--primary btn--sm"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {isLink ? <LinkIcon width={13} height={13} /> : <Download width={13} height={13} />}
+                <span>{isLink ? 'Mở link' : 'Tải file'}</span>
+              </a>
+            )}
             <button
               type="button"
               className="btn btn--ghost btn--sm"

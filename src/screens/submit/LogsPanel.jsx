@@ -1,14 +1,16 @@
 import { formatTimestamp, ACTION_LABEL } from './shared';
 
 export function LogsPanel({ logs }) {
+  const safeLogs = Array.isArray(logs) ? logs : [];
+
   return (
     <ul className="logs-timeline">
-      {logs.length === 0 ? (
+      {safeLogs.length === 0 ? (
         <li className="meta" style={{ padding: 'var(--sp-4)', textAlign: 'center' }}>
           Chưa có hoạt động nào.
         </li>
       ) : (
-        logs.map((l) => (
+        safeLogs.map((l) => (
           <li key={l.id} className="log-card">
             <div className="log-card__head">
               <span className={`log-badge log-badge--${l.action}`}>
@@ -21,7 +23,7 @@ export function LogsPanel({ logs }) {
 
             {l.by && (
               <span className="log-card__author">
-                {l.by.ten} ({l.by.mssv})
+                {l.by.ten || 'Ẩn danh'}{l.by.mssv ? ` (${l.by.mssv})` : ''}
               </span>
             )}
 

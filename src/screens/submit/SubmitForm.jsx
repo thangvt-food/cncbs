@@ -9,10 +9,12 @@ import {
   submitAssignment,
 } from '../../lib/submissions';
 
+const ALLOWED_EXTS = ['.pdf', '.doc', '.docx', '.ppt', '.pptx', '.zip', '.rar'];
+
 export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted }) {
-  const isPart = Boolean(bai.phans);
+  const isPart = Boolean(bai?.phans);
   const active = existingSub?.status === 'active';
-  const targetId = submissionId(bai.bai, isPart ? phan : null);
+  const targetId = bai ? submissionId(bai.bai, isPart ? phan : null) : '';
 
   const [nguoi1, setNguoi1] = useState(() => {
     if (active && existingSub?.nguoi?.[0]) return { ...existingSub.nguoi[0] };
@@ -43,9 +45,18 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
       setFile(null);
       return;
     }
+    const lastDot = selectedFile.name.lastIndexOf('.');
+    const ext = lastDot > 0 ? selectedFile.name.slice(lastDot).toLowerCase() : '';
+    if (!ALLOWED_EXTS.includes(ext)) {
+      setLoi(`Định dạng "${ext || 'không xác định'}" không được hỗ trợ. Vui lòng chọn .pdf, .docx, .pptx hoặc .zip.`);
+      setFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
+      return;
+    }
     if (selectedFile.size > MAX_FILE_BYTES) {
       setLoi(`File "${selectedFile.name}" (${formatBytes(selectedFile.size)}) vượt mức tối đa 20MB.`);
       setFile(null);
+      if (fileInputRef.current) fileInputRef.current.value = '';
       return;
     }
     setFile(selectedFile);
@@ -96,8 +107,8 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
         file: kind === 'file' ? file : null,
         link: kind === 'link' ? link.trim() : null,
       });
-      pushToast(`Đã nộp ${nhannot(targetId)}.`);
-      onSubmitted();
+      pushToast?.(`Đã nộp ${nhannot(targetId)}.`);
+      onSubmitted?.();
     } catch (err) {
       setLoi(err?.message || 'Nộp thất bại. Kiểm tra kết nối mạng rồi thử lại.');
     } finally {
@@ -131,6 +142,8 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
           <input
             type="text"
             className="form-input"
+            autoComplete="name"
+            maxLength={60}
             placeholder="Họ và tên sinh viên"
             value={nguoi1.ten}
             onChange={(e) => setNguoi1({ ...nguoi1, ten: e.target.value })}
@@ -139,6 +152,8 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
           <input
             type="text"
             inputMode="numeric"
+            autoComplete="off"
+            maxLength={15}
             className="form-input"
             placeholder="MSSV"
             value={nguoi1.mssv}
@@ -165,6 +180,8 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
               <input
                 type="text"
                 className="form-input"
+                autoComplete="name"
+                maxLength={60}
                 placeholder="Họ và tên người 2"
                 value={nguoi2.ten}
                 onChange={(e) => setNguoi2({ ...nguoi2, ten: e.target.value })}
@@ -173,6 +190,8 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
               <input
                 type="text"
                 inputMode="numeric"
+                autoComplete="off"
+                maxLength={15}
                 className="form-input"
                 placeholder="MSSV"
                 value={nguoi2.mssv}
@@ -216,7 +235,6 @@ export function SubmitForm({ bai, phan, existingSub, me, pushToast, onSubmitted 
                 setIsDragOver(false);
                 handleFileChange(e.dataTransfer.files?.[0]);
               }}
-              onClick={() => fileInputRef.current?.click()}
             >
               <input
                 ref={fileInputRef}

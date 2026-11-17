@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Sheet } from '../../components/Sheet';
 import { deleteSubmission, laLink } from '../../lib/submissions';
 
 export function DeleteSheet({ open, item, me, onClose, onDone, pushToast }) {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    if (open) setError('');
+  }, [open]);
 
   const isLink = laLink(item?.sub);
 
@@ -13,9 +17,9 @@ export function DeleteSheet({ open, item, me, onClose, onDone, pushToast }) {
     setError('');
     try {
       await deleteSubmission(item.id, me);
-      pushToast(isLink ? 'Đã gỡ liên kết đã nộp.' : 'Đã xoá file (đã lưu vào backup).');
-      onDone();
-      onClose();
+      pushToast?.(isLink ? 'Đã gỡ liên kết đã nộp.' : 'Đã xoá file (đã lưu vào backup).');
+      onDone?.();
+      onClose?.();
     } catch (err) {
       setError(err?.message || 'Xoá thất bại.');
     } finally {
