@@ -8,15 +8,47 @@ import {
   submissionId,
 } from '../../lib/submissions';
 import { formatTimestamp, isSafeHttpUrl, tinhTienSu } from './shared';
+import { exportSubmissionPackage } from './exportPackage';
 
 /* Bảng tổng hợp dạng quản lý: chỉ kiểm tra tiến độ, không có thao tác nộp/sửa/xoá
    (tránh trùng lặp với tab Nộp bài). */
-export function OverviewPanel({ subs = {} }) {
+export function OverviewPanel({ subs = {}, me, pushToast }) {
   const [filterMode, setFilterMode] = useState('all');
+  const [exporting, setExporting] = useState(false);
+  const [exportLabel, setExportLabel] = useState('');
   const safeSubs = subs || {};
   const { thieu, done, total } = tinhTienSu(safeSubs);
 
   const hasItems = filterMode === 'missing' ? thieu.length > 0 : filterMode === 'done' ? done > 0 : total > 0;
+
+  const handleExport = async () => {
+    if (exporting || done === 0) return;
+    setExporting(true);
+    setExportLabel('Đang chuẩn bị…');
+    try {
+      const result = await exportSubmissionPackage({
+        subs: safeSubs,
+        me,
+        onProgress: (p) => {
+          setExportLabel(
+            p.phase === 'zip'
+              ? `Đang nén ${p.percent}%`
+              : `Đang tải ${p.done}/${p.total}…`,
+          );
+        },
+      });
+      pushToast?.(
+        result.failures.length > 0
+          ? `Đã xuất ZIP nhưng ${result.failures.length} tệp tải lỗi — xem LOI-TAI-FILE.txt.`
+          : `Đã xuất ${result.fileName}.`,
+      );
+    } catch (err) {
+      pushToast?.(err?.message || 'Xuất ZIP thất bại.');
+    } finally {
+      setExporting(false);
+      setExportLabel('');
+    }
+  };
 
   return (
     <div className="overview-panel">
@@ -32,6 +64,17 @@ export function OverviewPanel({ subs = {} }) {
             Đã nộp ({done})
           </button>
         </div>
+
+        <button
+          type="button"
+          className="btn btn--primary btn--sm"
+          onClick={handleExport}
+          disabled={exporting || done === 0}
+          title="Đóng gói toàn bộ bài đã nộp + thông tin thành viên thành 1 file ZIP"
+        >
+          {exporting ? <span className="spinner" /> : <Download width={13} height={13} />}
+          <span>{exporting ? exportLabel : 'Xuất ZIP'}</span>
+        </button>
       </div>
 
       {thieu.length > 0 && filterMode !== 'done' && (

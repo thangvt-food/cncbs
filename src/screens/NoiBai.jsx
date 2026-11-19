@@ -285,7 +285,7 @@ export function NoiBai({ route, pushToast, initialTab }) {
       )}
 
       {/* ---------------- TAB 2: TỔNG HỢP (chỉ kiểm tra) ---------------- */}
-      {activeTab === 'tonghop' && <OverviewPanel subs={subs} />}
+      {activeTab === 'tonghop' && <OverviewPanel subs={subs} me={me} pushToast={pushToast} />}
 
       {/* ---------------- TAB 3: NHẬT KÝ ---------------- */}
       {activeTab === 'logs' && <LogsPanel logs={logs} />}
