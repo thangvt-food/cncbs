@@ -9,6 +9,9 @@ dist
 # Slide, đề kiểm tra và hồ sơ cá nhân để ngoài repo, không bao giờ commit
 *.pdf
 data/sources/archive/
+data/quizzes/
+vibe_images/
+TH SỮA/
 
 # Đồ thị phân tích repo do graphify sinh — tái tạo được bằng /graphify, không commit
 graphify-out/
