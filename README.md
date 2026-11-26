@@ -1,6 +1,6 @@
 # Luyện thi Công nghệ Chế biến Sữa
 
-Web ôn thi môn **Công nghệ Chế biến Sữa** (mã học phần **210339**): 160 câu hỏi từ 3 đề và một tài liệu đọc 7 chương (57.654 từ), chạy hoàn toàn phía trình duyệt, không cần backend.
+Web ôn thi môn **Công nghệ Chế biến Sữa** (mã học phần **210339**): 160 câu hỏi từ 3 đề và một tài liệu đọc 8 chương (63.884 từ), chạy hoàn toàn phía trình duyệt, không cần backend.
 
 ## Chế độ
 
@@ -16,7 +16,7 @@ Một đáp án · Đúng/Sai · Nhiều đáp án (chấm tuyệt đối theo t
 
 ## Tài liệu đọc
 
-Bản tổng hợp lý thuyết từ phụ đề video của GV Lê Trung Thiên, mỗi file markdown một chương — hiện có bảy chương (Chương 1–7), Chương 7 là chương cuối của học phần.
+Bản tổng hợp lý thuyết của GV Lê Trung Thiên, mỗi file markdown một chương — hiện có tám chương (Chương 1–8). Chương 1–7 tổng hợp từ phụ đề playlist "Công nghệ Chế biến Sữa"; Chương 8 tổng hợp từ bộ slide bài giảng "Membrane Processing in Dairy Industry".
 
 - **Vị trí đọc** lưu theo `{chương, chỉ số khối, phần đã qua của khối}` chứ không lưu số trang hay toạ độ cuộn — đổi cỡ chữ, đổi font, xoay máy hay đổi thiết bị cùng trình duyệt thì vẫn về đúng đoạn đang đọc dở.
 - **Cài đặt đọc**: cỡ chữ 14–28px, giãn dòng, bề ngang cột, bốn họ font (Literata, Noto Serif, EB Garamond, Be Vietnam Pro — đều có subset `vietnamese`), ba nền Sáng/Giấy/Tối (tương phản với chữ đều ≥ 4.5:1), căn lề, và hai cách đọc Cuộn dọc / Lật trang.
@@ -55,9 +55,9 @@ File sinh ra từ script được commit, vì vậy deploy chỉ cần `npm run 
 | Thi giữa kỳ môn Sữa lần 2 | `gemini-code-1793869261405.json` | 52 |
 | Kỹ thuật Thực phẩm 2 (giữa kỳ) | `gemini-code-1793874992421.json` | 48 |
 
-Bốn chương tài liệu đọc ở `data/sources/book/`. `scripts/build-book.mjs` dùng `marked.lexer` chuyển markdown thành **khối có kiểu** (`heading`/`para`/`li`/`table`/`quote`/`hr`) rồi ghi một JSON cho mỗi chương vào `src/data/book/`; mỗi run chữ kèm offset trong `text` nên tô sáng và đánh dấu kết quả tìm không cần đến HTML thô. Tên chương khai báo trong `SOURCES` của script. Script in báo cáo số khối/bảng/từ từng chương và cảnh báo bảng lệch số cột.
+Tám chương tài liệu đọc ở `data/sources/book/`. `scripts/build-book.mjs` dùng `marked.lexer` chuyển markdown thành **khối có kiểu** (`heading`/`para`/`li`/`table`/`quote`/`hr`) rồi ghi một JSON cho mỗi chương vào `src/data/book/`; mỗi run chữ kèm offset trong `text` nên tô sáng và đánh dấu kết quả tìm không cần đến HTML thô. Tên chương khai báo trong `SOURCES` của script. Script in báo cáo số khối/bảng/từ từng chương và cảnh báo bảng lệch số cột.
 
-Thêm chương mới và kiểm tra JSON có sẵn thành skill `.qoder/skills/build-book/`: `scripts/add-chapter.mjs <file.md> --title "..."` lo từ file md tới `SOURCES` tới build, còn `scripts/check-book.mjs` soi lại toàn bộ block model (offset của từng run, số cột bảng, mục lục, số liệu meta) và báo chênh lệch `blockCount` so với bản đã commit — thứ làm vị trí đọc và tô sáng của người dùng cũ nhảy sai chỗ.
+Thêm chương mới là bốn bước: đặt file markdown vào `data/sources/book/` (mở đầu bằng một dòng `# ` — bị bỏ vì trùng tiêu đề chương — và có ít nhất một `## `), thêm một mục tử `{ id, file, title }` vào `SOURCES` với `title` khai báo tại đây chứ không lấy từ file, chạy `npm run book`, rồi đọc hết bốn cảnh báo trong báo cáo trước khi commit. Toàn bộ màn đọc suy ra từ `index.json` nên **không phải sửa code** khi thêm chương.
 
 | Chương | Nguồn | Từ |
 | --- | --- | --- |
@@ -65,6 +65,10 @@ Thêm chương mới và kiểm tra JSON có sẵn thành skill `.qoder/skills/b
 | 2 · Cấu trúc, thành phần và sinh tổng hợp sữa | `tong-hop-chuong-2-cong-nghe-che-bien-sua.md` | 4.168 |
 | 3 · Các cấu phần hoá học của sữa | `tong-hop-chuong-3-cong-nghe-che-bien-sua.md` | 5.047 |
 | 4 · Tính chất vật lý và hoá lý của sữa | `tong-hop-chuong-4-cong-nghe-che-bien-sua.md` | 4.028 |
+| 5 · Vi sinh vật học sữa | `tong-hop-chuong-5-cong-nghe-che-bien-sua.md` | 8.165 |
+| 6 · Các quá trình chế biến cơ bản của sữa | `tong-hop-chuong-6-cong-nghe-che-bien-sua.md` | 14.983 |
+| 7 · Các sản phẩm sữa | `tong-hop-chuong-7-cong-nghe-che-bien-sua.md` | 18.678 |
+| 8 · Công nghệ màng — các quá trình lọc theo áp suất | `tong-hop-chuong-8-cong-nghe-che-bien-sua.md` | 6.230 |
 
 ## Cấu trúc
 

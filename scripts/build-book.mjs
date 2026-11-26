@@ -11,7 +11,7 @@ const BOOK = {
   id: 'cncbs-ly-thuyet',
   title: 'Công nghệ Chế biến Sữa — Tổng hợp lý thuyết',
   author: 'GV Lê Trung Thiên · ĐH Nông Lâm TP.HCM',
-  note: 'Tổng hợp từ phụ đề playlist “Công nghệ Chế biến Sữa”, kênh DrThienNonglam',
+  note: 'Chương 1–7 tổng hợp từ phụ đề playlist “Công nghệ Chế biến Sữa”, kênh DrThienNonglam; Chương 8 từ bộ slide bài giảng về công nghệ màng',
 };
 
 const SOURCES = [
@@ -22,6 +22,7 @@ const SOURCES = [
   { id: 'ch5', file: 'tong-hop-chuong-5-cong-nghe-che-bien-sua.md', title: 'Vi sinh vật học sữa' },
   { id: 'ch6', file: 'tong-hop-chuong-6-cong-nghe-che-bien-sua.md', title: 'Các quá trình chế biến cơ bản của sữa' },
   { id: 'ch7', file: 'tong-hop-chuong-7-cong-nghe-che-bien-sua.md', title: 'Các sản phẩm sữa' },
+  { id: 'ch8', file: 'tong-hop-chuong-8-cong-nghe-che-bien-sua.md', title: 'Công nghệ màng — các quá trình lọc theo áp suất' },
 ];
 
 const report = { skipped: [], oddTables: [], softSplits: 0, shortened: 0, missingWords: [] };
